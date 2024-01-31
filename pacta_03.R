@@ -2,14 +2,29 @@ suppressPackageStartupMessages({
   library(pacta.portfolio.utils)
   library(pacta.portfolio.report)
   library(pacta.executive.summary)
-  library(cli)
   library(dplyr)
   library(readr)
   library(jsonlite)
   library(fs)
 })
 
-cli::cli_h1("web_tool_script_3.R{get_build_version_msg()}")
+# defaulting to WARN to maintain current (silent) behavior.
+logger::log_threshold(Sys.getenv("LOG_LEVEL", "WARN"))
+logger::log_formatter(logger::formatter_glue)
+
+# -------------------------------------------------------------------------
+
+logger::log_info("Starting portfolio report process")
+
+logger::log_trace("Determining configuration file path")
+cfg_path <- commandArgs(trailingOnly = TRUE)
+if (length(cfg_path) == 0 || cfg_path == "") {
+  logger::log_warn("No configuration file specified, using default")
+  cfg_path <- "input_dir/default_config.json"
+}
+logger::log_debug("Loading configuration from file: \"{cfg_path}\".")
+cfg <- fromJSON(cfg_path)
+
 
 if (!exists("portfolio_name_ref_all")) {
   portfolio_name_ref_all <- "1234"
@@ -326,3 +341,5 @@ if (dir.exists(exec_summary_template_path) && (peer_group %in% c("assetmanager",
   # this is required for the online tool to know that the process has been completed.
   invisible(file.copy(blank_pdf(), es_dir))
 }
+
+logger::log_info("Portfolio report finished.")
