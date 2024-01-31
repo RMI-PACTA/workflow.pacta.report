@@ -35,14 +35,9 @@ if (!exists("portfolio_root_dir")) {
 
 setup_project()
 
-set_webtool_paths(portfolio_root_dir)
-
 set_portfolio_parameters(file_path = file.path(par_file_path, paste0(portfolio_name_ref_all, "_PortfolioParameters.yml")))
 
 set_project_parameters(file.path(working_location, "parameter_files", paste0("ProjectParameters_", project_code, ".yml")))
-
-analysis_inputs_path <- set_analysis_inputs_path(data_location_ext)
-
 
 # quit if there's no relevant PACTA assets -------------------------------------
 
@@ -90,95 +85,95 @@ add_inv_and_port_names_if_needed <- function(data) {
 }
 
 audit_file <- readRDS_or_return_alt_data(
-  filepath = file.path(proc_input_path, portfolio_name_ref_all, "audit_file.rds"),
+  filepath = file.path(cfg$output_dir, "audit_file.rds"),
   alt_return = empty_audit_file()
 )
 audit_file <- add_inv_and_port_names_if_needed(audit_file)
 
 portfolio_overview <- readRDS_or_return_alt_data(
-  filepath = file.path(proc_input_path, portfolio_name_ref_all, "overview_portfolio.rds"),
+  filepath = file.path(cfg$output_dir, "overview_portfolio.rds"),
   alt_return = empty_portfolio_overview()
 )
 portfolio_overview <- add_inv_and_port_names_if_needed(portfolio_overview)
 
 emissions <- readRDS_or_return_alt_data(
-  filepath = file.path(proc_input_path, portfolio_name_ref_all, "emissions.rds"),
+  filepath = file.path(cfg$output_dir, "emissions.rds"),
   alt_return = empty_emissions_results()
 )
 emissions <- add_inv_and_port_names_if_needed(emissions)
 
 total_portfolio <- readRDS_or_return_alt_data(
-  filepath = file.path(proc_input_path, portfolio_name_ref_all, "total_portfolio.rds"),
+  filepath = file.path(cfg$output_dir, "total_portfolio.rds"),
   alt_return = empty_portfolio_results()
 )
 total_portfolio <- add_inv_and_port_names_if_needed(total_portfolio)
 
 equity_results_portfolio <- readRDS_or_return_alt_data(
-  filepath = file.path(results_path, portfolio_name_ref_all, "Equity_results_portfolio.rds"),
+  filepath = file.path(cfg$output_dir, "Equity_results_portfolio.rds"),
   alt_return = empty_portfolio_results()
 )
 equity_results_portfolio <- add_inv_and_port_names_if_needed(equity_results_portfolio)
 
 bonds_results_portfolio <- readRDS_or_return_alt_data(
-  filepath = file.path(results_path, portfolio_name_ref_all, "Bonds_results_portfolio.rds"),
+  filepath = file.path(cfg$output_dir, "Bonds_results_portfolio.rds"),
   alt_return = empty_portfolio_results()
 )
 bonds_results_portfolio <- add_inv_and_port_names_if_needed(bonds_results_portfolio)
 
 equity_results_company <- readRDS_or_return_alt_data(
-  filepath = file.path(results_path, portfolio_name_ref_all, "Equity_results_company.rds"),
+  filepath = file.path(cfg$output_dir, "Equity_results_company.rds"),
   alt_return = empty_company_results()
 )
 equity_results_company <- add_inv_and_port_names_if_needed(equity_results_company)
 
 bonds_results_company <- readRDS_or_return_alt_data(
-  filepath = file.path(results_path, portfolio_name_ref_all, "Bonds_results_company.rds"),
+  filepath = file.path(cfg$output_dir, "Bonds_results_company.rds"),
   alt_return = empty_company_results()
 )
 bonds_results_company <- add_inv_and_port_names_if_needed(bonds_results_company)
 
 equity_results_map <- readRDS_or_return_alt_data(
-  filepath = file.path(results_path, portfolio_name_ref_all, "Equity_results_map.rds"),
+  filepath = file.path(cfg$output_dir, "Equity_results_map.rds"),
   alt_return = empty_map_results()
 )
 equity_results_map <- add_inv_and_port_names_if_needed(equity_results_map)
 
 bonds_results_map <- readRDS_or_return_alt_data(
-  filepath = file.path(results_path, portfolio_name_ref_all, "Bonds_results_map.rds"),
+  filepath = file.path(cfg$output_dir, "Bonds_results_map.rds"),
   alt_return = empty_map_results()
 )
 bonds_results_map <- add_inv_and_port_names_if_needed(bonds_results_map)
 
 peers_equity_results_portfolio <- readRDS_or_return_alt_data(
-  filepath = file.path(analysis_inputs_path, paste0(project_code, "_peers_equity_results_portfolio.rds")),
+  filepath = file.path(cfg$data_dir, paste0(project_code, "_peers_equity_results_portfolio.rds")),
   alt_return = empty_portfolio_results()
 )
 
 peers_bonds_results_portfolio <- readRDS_or_return_alt_data(
-  filepath = file.path(analysis_inputs_path, paste0(project_code, "_peers_bonds_results_portfolio.rds")),
+  filepath = file.path(cfg$data_dir, paste0(project_code, "_peers_bonds_results_portfolio.rds")),
   alt_return = empty_portfolio_results()
 )
 
 peers_equity_results_user <- readRDS_or_return_alt_data(
-  filepath = file.path(analysis_inputs_path, paste0(project_code, "_peers_equity_results_portfolio_ind.rds")),
+  filepath = file.path(cfg$data_dir, paste0(project_code, "_peers_equity_results_portfolio_ind.rds")),
   alt_return = empty_portfolio_results()
 )
 
 peers_bonds_results_user <- readRDS_or_return_alt_data(
-  filepath = file.path(analysis_inputs_path, paste0(project_code, "_peers_bonds_results_portfolio_ind.rds")),
+  filepath = file.path(cfg$data_dir, paste0(project_code, "_peers_bonds_results_portfolio_ind.rds")),
   alt_return = empty_portfolio_results()
 )
 
-indices_equity_results_portfolio <- readRDS(file.path(analysis_inputs_path, "Indices_equity_results_portfolio.rds"))
+indices_equity_results_portfolio <- readRDS(file.path(cfg$data_dir, "Indices_equity_results_portfolio.rds"))
 
-indices_bonds_results_portfolio <- readRDS(file.path(analysis_inputs_path, "Indices_bonds_results_portfolio.rds"))
+indices_bonds_results_portfolio <- readRDS(file.path(cfg$data_dir, "Indices_bonds_results_portfolio.rds"))
 
 
 # create interactive report ----------------------------------------------------
 
 survey_dir <- file.path(user_results_path, project_code, "survey")
 real_estate_dir <- file.path(user_results_path, project_code, "real_estate")
-output_dir <- file.path(outputs_path, portfolio_name_ref_all)
+output_dir <- file.path(cfg$output_dir)
 dataframe_translations <- readr::read_csv(
   system.file("extdata/translation/dataframe_labels.csv", package = "pacta.portfolio.report"),
   col_types = cols()
@@ -203,8 +198,8 @@ portfolio_config_path <- file.path(par_file_path, paste0(portfolio_name_ref_all,
 project_config_path <- file.path(working_location, "parameter_files", paste0("ProjectParameters_", project_code, ".yml"))
 pacta_data_public_manifest <-
   list(
-    creation_time_date = jsonlite::read_json(file.path(analysis_inputs_path, "manifest.json"))$creation_time_date,
-    outputs_manifest = jsonlite::read_json(file.path(analysis_inputs_path, "manifest.json"))$outputs_manifest
+    creation_time_date = jsonlite::read_json(file.path(cfg$data_dir, "manifest.json"))$creation_time_date,
+    outputs_manifest = jsonlite::read_json(file.path(cfg$data_dir, "manifest.json"))$outputs_manifest
   )
 
 configs <-
@@ -269,7 +264,7 @@ create_interactive_report(
 survey_dir <- fs::path_abs(file.path(user_results_path, project_code, "survey"))
 real_estate_dir <- fs::path_abs(file.path(user_results_path, project_code, "real_estate"))
 score_card_dir <- fs::path_abs(file.path(user_results_path, project_code, "score_card"))
-output_dir <- file.path(outputs_path, portfolio_name_ref_all)
+output_dir <- file.path(cfg$output_dir)
 es_dir <- file.path(output_dir, "executive_summary")
 if (!dir.exists(es_dir)) {
   dir.create(es_dir, showWarnings = FALSE, recursive = TRUE)
@@ -337,7 +332,7 @@ if (dir.exists(exec_summary_template_path) && (peer_group %in% c("assetmanager",
     total_portfolio = total_portfolio,
     scenario_selected = "1.5C-Unif",
     currency_exchange_value = currency_exchange_value,
-    log_dir = log_path
+    log_dir = cfg$output_dir
   )
 } else {
   # this is required for the online tool to know that the process has been completed.
