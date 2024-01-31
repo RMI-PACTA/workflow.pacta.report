@@ -46,11 +46,13 @@ analysis_inputs_path <- set_analysis_inputs_path(data_location_ext)
 
 # quit if there's no relevant PACTA assets -------------------------------------
 
-total_portfolio_path <- file.path(proc_input_path, portfolio_name_ref_all, "total_portfolio.rds")
+total_portfolio_path <- file.path(cfg$output_dir, "total_portfolio.rds")
 if (file.exists(total_portfolio_path)) {
   total_portfolio <- readRDS(total_portfolio_path)
+  logger::log_trace("Checking for PACTA relevant data in file: \"{total_portfolio_path}\".")
   quit_if_no_pacta_relevant_data(total_portfolio)
 } else {
+  logger::log_warn("file \"{total_portfolio_path}\" does not exist.")
   warning("This is weird... the `total_portfolio.rds` file does not exist in the `30_Processed_inputs` directory.")
 }
 
