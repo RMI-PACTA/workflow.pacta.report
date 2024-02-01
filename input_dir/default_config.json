@@ -34,10 +34,11 @@
   "portfolio_name": "Default Portfolio",
   "investor_name": "Default Investor",
   "peer_group": "bank",
-  "language_set": "EN",
+  "language_select": "EN",
   "user_id": "4",
   "project_report_name": "general",
   "display_currency": "USD",
+  "currency_exchange_value": 1,
   "select_scenario": "WEO2022_NZE_2050",
   "scenario_other": "GECO2022_1.5C",
   "portfolio_allocation_method": "portfolio_weight",
@@ -62,5 +63,7 @@
     "FuelCell",
     "Electric Arc Furnace"
   ],
-  "user_results_path": "input_dir/user_results"
+  "user_results_path": "input_dir/user_results",
+  "real_estate_dir": "input_dir/real_estate",
+  "survey_dir": "input_dir/survey"
 }

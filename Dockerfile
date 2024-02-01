@@ -27,17 +27,13 @@ LABEL org.opencontainers.image.authors=""
 ARG DEBIAN_FRONTEND="noninteractive"
 ARG DEBCONF_NOWARNINGS="yes"
 
-# # install system dependencies
-# RUN apt-get update \
-#     && apt-get install -y --no-install-recommends \
-#       git=1:2.34.* \
-#       libcurl4-openssl-dev=7.81.* \
-#       libicu-dev=70.* \
-#       libssl-dev=3.0.* \
-#       openssh-client=1:8.* \
-#       wget=1.21.* \
-#     && chmod -R a+rwX /root \
-#     && rm -rf /var/lib/apt/lists/*
+# install system dependencies
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+      pandoc=2.9.* \
+      libpng-dev=1.6.* \
+    && chmod -R a+rwX /root \
+    && rm -rf /var/lib/apt/lists/*
 
 # set frozen CRAN repo
 ARG CRAN_REPO="https://packagemanager.posit.co/cran/__linux__/jammy/2023-10-30"
