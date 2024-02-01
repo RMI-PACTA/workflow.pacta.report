@@ -25,16 +25,8 @@ if (length(cfg_path) == 0 || cfg_path == "") {
 logger::log_debug("Loading configuration from file: \"{cfg_path}\".")
 cfg <- fromJSON(cfg_path)
 
-
-if (!exists("portfolio_name_ref_all")) {
-  portfolio_name_ref_all <- "1234"
-}
-if (!exists("portfolio_root_dir")) {
-  portfolio_root_dir <- "working_dir"
-}
-
-setup_project()
-
+project_config_path <- file.path(working_location, "parameter_files", paste0("ProjectParameters_", cfg$project_code, ".yml"))
+project_config <- fromJSON(file = project_config_path)
 
 set_project_parameters(file.path(working_location, "parameter_files", paste0("ProjectParameters_", project_code, ".yml")))
 
@@ -193,7 +185,6 @@ sector_order <- readr::read_csv(
 )
 
 # combine config files to send to create_interactive_report()
-portfolio_config_path <- file.path(par_file_path, paste0(portfolio_name_ref_all, "_PortfolioParameters.yml"))
 pacta_data_public_manifest <-
   list(
     creation_time_date = jsonlite::read_json(file.path(cfg$data_dir, "manifest.json"))$creation_time_date,
@@ -202,7 +193,7 @@ pacta_data_public_manifest <-
 
 configs <-
   list(
-    portfolio_config = config::get(file = portfolio_config_path),
+    portfolio_config = config::get(file = cfg_path),
     project_config = config::get(file = project_config_path),
     pacta_data_public_manifest = pacta_data_public_manifest
   )
@@ -211,6 +202,7 @@ configs <-
 class(configs$portfolio_config) <- c(class(configs$portfolio_config), "list")
 class(configs$project_config) <- c(class(configs$project_config), "list")
 
+template_path <- system.file("templates", package = "pacta.portfolio.report") #TODO: generalize this to accept non-builtin templates
 template_dir_name <- paste(tolower(project_report_name), tolower(cfg$language_select), "template", sep = "_")
 template_dir <- file.path(template_path, template_dir_name)
 
