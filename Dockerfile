@@ -30,8 +30,9 @@ ARG DEBCONF_NOWARNINGS="yes"
 # install system dependencies
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-      pandoc=2.9.* \
       libpng-dev=1.6.* \
+      libxt6=1:1.2.* \
+      pandoc=2.9.* \
     && chmod -R a+rwX /root \
     && rm -rf /var/lib/apt/lists/*
 
