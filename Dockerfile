@@ -73,6 +73,7 @@ RUN Rscript -e "\
   "
 
 COPY . /
+COPY parameter_files /parameter_files
 
 # set default run behavior
 ENTRYPOINT ["/run-pacta.sh"]

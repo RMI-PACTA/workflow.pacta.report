@@ -25,8 +25,15 @@ if (length(cfg_path) == 0 || cfg_path == "") {
 logger::log_debug("Loading configuration from file: \"{cfg_path}\".")
 cfg <- fromJSON(cfg_path)
 
-project_config_path <- file.path(working_location, "parameter_files", paste0("ProjectParameters_", cfg$project_code, ".yml"))
-project_config <- fromJSON(file = project_config_path)
+logger::log_trace("Determining project configuration path")
+project_config_path <- file.path(
+  "/", "parameter_files", #TODO: generalize this to accept non-builtin templates
+  paste0("ProjectParameters_", cfg$project_code, ".json")
+)
+logger::log_debug("Loading project configuration from file: \"{project_config_path}\".")
+project_config <- fromJSON(txt = project_config_path)
+
+stop("That's enough for now")
 
 set_project_parameters(file.path(working_location, "parameter_files", paste0("ProjectParameters_", project_code, ".yml")))
 
@@ -215,7 +222,7 @@ create_interactive_report(
   investor_name = cfg$investor_name,
   portfolio_name = cfg$portfolio_name,
   peer_group = cfg$peer_group,
-  start_year = start_year,
+  start_year = cfg$start_year,
   select_scenario = select_scenario,
   select_scenario_other = scenario_other,
   portfolio_allocation_method = portfolio_allocation_method,
@@ -271,7 +278,7 @@ if (dir.exists(exec_summary_template_path) && (cfg$peer_group %in% c("assetmanag
       investor_name = cfg$investor_name,
       portfolio_name = cfg$portfolio_name,
       peer_group = cfg$peer_group,
-      start_year = start_year,
+      start_year = cfg$start_year,
       scenario_source = "GECO2021",
       scenario_selected = "1.5C-Unif",
       scenario_geography = "Global",
