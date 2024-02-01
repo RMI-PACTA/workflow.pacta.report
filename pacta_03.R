@@ -25,14 +25,6 @@ if (length(cfg_path) == 0 || cfg_path == "") {
 logger::log_debug("Loading configuration from file: \"{cfg_path}\".")
 cfg <- fromJSON(cfg_path)
 
-logger::log_trace("Determining project configuration path")
-project_config_path <- file.path(
-  "/", "parameter_files", #TODO: generalize this to accept non-builtin templates
-  paste0("ProjectParameters_", cfg$project_code, ".json")
-)
-logger::log_debug("Loading project configuration from file: \"{project_config_path}\".")
-project_config <- fromJSON(txt = project_config_path)
-
 # quit if there's no relevant PACTA assets -------------------------------------
 
 total_portfolio_path <- file.path(cfg$output_dir, "total_portfolio.rds")
