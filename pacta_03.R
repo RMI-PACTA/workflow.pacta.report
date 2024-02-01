@@ -33,10 +33,6 @@ project_config_path <- file.path(
 logger::log_debug("Loading project configuration from file: \"{project_config_path}\".")
 project_config <- fromJSON(txt = project_config_path)
 
-stop("That's enough for now")
-
-set_project_parameters(file.path(working_location, "parameter_files", paste0("ProjectParameters_", project_code, ".yml")))
-
 # quit if there's no relevant PACTA assets -------------------------------------
 
 total_portfolio_path <- file.path(cfg$output_dir, "total_portfolio.rds")
@@ -210,7 +206,7 @@ class(configs$portfolio_config) <- c(class(configs$portfolio_config), "list")
 class(configs$project_config) <- c(class(configs$project_config), "list")
 
 template_path <- system.file("templates", package = "pacta.portfolio.report") #TODO: generalize this to accept non-builtin templates
-template_dir_name <- paste(tolower(project_report_name), tolower(cfg$language_select), "template", sep = "_")
+template_dir_name <- paste(tolower(cfg$project_report_name), tolower(cfg$language_select), "template", sep = "_")
 template_dir <- file.path(template_path, template_dir_name)
 
 create_interactive_report(
@@ -223,14 +219,14 @@ create_interactive_report(
   portfolio_name = cfg$portfolio_name,
   peer_group = cfg$peer_group,
   start_year = cfg$start_year,
-  select_scenario = select_scenario,
-  select_scenario_other = scenario_other,
-  portfolio_allocation_method = portfolio_allocation_method,
-  scenario_geography = scenario_geography,
-  twodi_sectors = sector_list,
-  green_techs = green_techs,
-  tech_roadmap_sectors = tech_roadmap_sectors,
-  pacta_sectors_not_analysed = pacta_sectors_not_analysed,
+  select_scenario = cfg$select_scenario,
+  select_scenario_other = cfg$scenario_other,
+  portfolio_allocation_method = cfg$portfolio_allocation_method,
+  scenario_geography = cfg$scenario_geography,
+  twodi_sectors = cfg$sector_list,
+  green_techs = cfg$green_techs,
+  tech_roadmap_sectors = cfg$tech_roadmap_sectors,
+  pacta_sectors_not_analysed = cfg$pacta_sectors_not_analysed,
   audit_file = audit_file,
   emissions = emissions,
   portfolio_overview = portfolio_overview,
@@ -248,8 +244,8 @@ create_interactive_report(
   peers_bonds_results_user = peers_bonds_results_user,
   dataframe_translations = dataframe_translations,
   js_translations = js_translations,
-  display_currency = display_currency,
-  currency_exchange_value = currency_exchange_value,
+  display_currency = cfg$display_currency,
+  currency_exchange_value = cfg$currency_exchange_value,
   header_dictionary = header_dictionary,
   sector_order = sector_order,
   configs = configs
@@ -328,7 +324,7 @@ if (dir.exists(exec_summary_template_path) && (cfg$peer_group %in% c("assetmanag
     peer_group = cfg$peer_group,
     total_portfolio = total_portfolio,
     scenario_selected = "1.5C-Unif",
-    currency_exchange_value = currency_exchange_value,
+    currency_exchange_value = cfg$currency_exchange_value,
     log_dir = cfg$output_dir
   )
 } else {
