@@ -61,5 +61,6 @@
     "Electric",
     "FuelCell",
     "Electric Arc Furnace"
-  ]
+  ],
+  "user_results_path": "input_dir/user_results"
 }
