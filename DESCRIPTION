@@ -1,0 +1,11 @@
+Type: PACTA
+Description: Run PACTA.
+Depends:
+  dplyr,
+  fs,
+  jsonlite,
+  logger,
+  pacta.executive.summary,
+  pacta.portfolio.report,
+  pacta.portfolio.utils,
+  readr
