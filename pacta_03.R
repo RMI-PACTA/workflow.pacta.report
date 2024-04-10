@@ -245,7 +245,7 @@ create_interactive_report(
   select_scenario_other = cfg$scenario_other,
   portfolio_allocation_method = cfg$portfolio_allocation_method,
   scenario_geography = cfg$scenario_geography,
-  twodi_sectors = cfg$sector_list,
+  pacta_sectors = cfg$sector_list,
   green_techs = cfg$green_techs,
   tech_roadmap_sectors = cfg$tech_roadmap_sectors,
   pacta_sectors_not_analysed = cfg$pacta_sectors_not_analysed,
