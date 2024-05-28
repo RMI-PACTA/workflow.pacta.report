@@ -21,6 +21,11 @@ RUN apt-get update \
     && chmod -R a+rwX /root \
     && rm -rf /var/lib/apt/lists/*
 
+# Create and use non-root user
+RUN useradd -m -s /bin/bash workflow-pacta-report
+USER workflow-pacta-report
+WORKDIR /home/workflow-pacta-report
+
 # copy in everything from this repo
 COPY DESCRIPTION /workflow.pacta.report/DESCRIPTION
 
@@ -43,8 +48,3 @@ RUN Rscript -e "pak::local_install(root = '/workflow.pacta.report')"
 # set default run behavior
 ENTRYPOINT ["/run-pacta.sh"]
 CMD ["input_dir/default_config.json"]
-
-# Create and use non-root user
-RUN useradd -m -s /bin/bash workflow-pacta-report
-USER workflow-pacta-report
-WORKDIR /home/workflow-pacta-report
