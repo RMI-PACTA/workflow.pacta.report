@@ -9,9 +9,8 @@ LABEL org.opencontainers.image.vendor="RMI"
 LABEL org.opencontainers.image.base.name="ghcr.io/rmi-pacta/workflow.pacta:main"
 LABEL org.opencontainers.image.authors="Alex Axthelm"
 
-USER root
-
 # install system dependencies
+USER root
 RUN apt-get update \
     && DEBIAN_FRONTEND="noninteractive" \
     apt-get install -y --no-install-recommends \
@@ -34,6 +33,7 @@ WORKDIR /home/workflow-pacta-report
 # copy in everything from this repo
 COPY DESCRIPTION /workflow.pacta.report/DESCRIPTION
 
+USER root #TODO: remove this line
 # Rprofile, including CRAN-like repos are inhertied from base image
 # install pak, find dependencises from DESCRIPTION, and install them.
 RUN Rscript -e "\
@@ -43,12 +43,15 @@ RUN Rscript -e "\
     print(pkg_deps); \
     pak::pak(pkg_deps); \
     "
+USER workflow-pacta-report
 
 FROM base AS install-pacta
 
 COPY . /workflow.pacta.report/
 
+USER root #TODO: remove this line
 RUN Rscript -e "pak::local_install(root = '/workflow.pacta.report')"
+USER workflow-pacta-report
 
 # set default run behavior
 ENTRYPOINT ["/run-pacta.sh"]
