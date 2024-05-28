@@ -22,7 +22,12 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Create and use non-root user
-RUN useradd -m -s /bin/bash workflow-pacta-report
+# -m creates a home directory,
+# -G adds user to staff group allowing R package installation.
+RUN useradd \
+      -m \
+      -G staff \
+      workflow-pacta-report
 USER workflow-pacta-report
 WORKDIR /home/workflow-pacta-report
 
