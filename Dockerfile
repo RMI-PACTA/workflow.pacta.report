@@ -60,7 +60,7 @@ COPY DESCRIPTION /workflow.pacta.report/DESCRIPTION
 # Rprofile, including CRAN-like repos are inhertied from base image
 # install pak, find dependencises from DESCRIPTION, and install them.
 RUN Rscript -e "\
-    install.packages('pak'); \
+    install.packages(c('pak', 'pkgdepends')); \
     deps <- pak::local_deps(root = '/workflow.pacta.report'); \
     pkg_deps <- deps[!deps[['direct']], 'ref']; \
     print(pkg_deps); \
