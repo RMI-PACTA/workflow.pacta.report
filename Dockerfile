@@ -1,4 +1,4 @@
-FROM ghcr.io/rmi-pacta/workflow.pacta:main AS base
+FROM ghcr.io/rmi-pacta/workflow.pacta:pr-71 AS base
 
 # set Docker image labels
 LABEL org.opencontainers.image.source=https://github.com/RMI-PACTA/workflow.pacta.report
