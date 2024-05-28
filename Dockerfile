@@ -21,41 +21,30 @@ RUN apt-get update \
     && chmod -R a+rwX /root \
     && rm -rf /var/lib/apt/lists/*
 
-# set frozen CRAN repo
-ARG CRAN_REPO="https://packagemanager.posit.co/cran/__linux__/jammy/2024-03-05"
-RUN echo "options(repos = c(CRAN = '$CRAN_REPO'), pkg.sysreqs = FALSE)" >> "${R_HOME}/etc/Rprofile.site" \
-      # install packages for dependency resolution and installation
-      && Rscript -e "install.packages('pak'); pak::pkg_install('renv')"
+# copy in everything from this repo
+COPY DESCRIPTION /workflow.pacta.report/DESCRIPTION
+
+# Rprofile, including CRAN-like repos are inhertied from base image
+# install pak, find dependencises from DESCRIPTION, and install them.
+RUN Rscript -e "\
+    install.packages('pak'); \
+    deps <- pak::local_deps(root = '/workflow.pacta.report'); \
+    pkg_deps <- deps[!deps[['direct']], 'ref']; \
+    print(pkg_deps); \
+    pak::pak(pkg_deps); \
+    "
 
 FROM base AS install-pacta
 
-# copy in everything from this repo
-COPY DESCRIPTION /DESCRIPTION
+COPY . /workflow.pacta.report/
 
-# PACTA R package tags
-ARG report_tag="/tree/main"
-ARG summary_tag="/tree/main"
-ARG utils_tag="/tree/main"
-
-ARG report_url="https://github.com/rmi-pacta/pacta.portfolio.report"
-ARG summary_url="https://github.com/rmi-pacta/pacta.executive.summary"
-ARG utils_url="https://github.com/rmi-pacta/pacta.portfolio.utils"
-
-# install R package dependencies
-RUN Rscript -e "\
-  gh_pkgs <- \
-    c( \
-      paste0('$report_url', '$report_tag'), \
-      paste0('$summary_url', '$summary_tag'), \
-      paste0('$utils_url', '$utils_tag') \
-    ); \
-  workflow_pkgs <- renv::dependencies('DESCRIPTION')[['Package']]; \
-  workflow_pkgs <- grep('^pacta[.]', workflow_pkgs, value = TRUE, invert = TRUE); \
-  pak::pak(c(gh_pkgs, workflow_pkgs)); \
-  "
-
-COPY . /
+RUN Rscript -e "pak::local_install(root = '/workflow.pacta.report')"
 
 # set default run behavior
 ENTRYPOINT ["/run-pacta.sh"]
 CMD ["input_dir/default_config.json"]
+
+# Create and use non-root user
+RUN useradd -m -s /bin/bash workflow-pacta-report
+USER workflow-pacta-report
+WORKDIR /home/workflow-pacta-report
