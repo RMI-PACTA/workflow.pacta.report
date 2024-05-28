@@ -9,13 +9,12 @@ LABEL org.opencontainers.image.vendor="RMI"
 LABEL org.opencontainers.image.base.name="ghcr.io/rmi-pacta/workflow.pacta:main"
 LABEL org.opencontainers.image.authors="Alex Axthelm"
 
-# set apt-get to noninteractive mode
-ARG DEBIAN_FRONTEND="noninteractive"
-ARG DEBCONF_NOWARNINGS="yes"
+USER root
 
 # install system dependencies
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
+    && DEBIAN_FRONTEND="noninteractive" \
+    apt-get install -y --no-install-recommends \
       libpng-dev=1.6.* \
       libxt6=1:1.2.* \
       pandoc=2.9.* \
