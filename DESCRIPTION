@@ -15,7 +15,7 @@ Authors@R:
       person(given = "RMI",
              role = c("cph", "fnd"),
              email = "PACTA4investors@rmi.org"))
-Description: Create Interactive Reports and Executive Summaries for PACTA
+Description: Create Interactive Reports and Executive Summaries for PACTA.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
