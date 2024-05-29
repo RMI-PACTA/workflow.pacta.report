@@ -1,6 +1,5 @@
 run_pacta_reporting_process <- function() {
   suppressPackageStartupMessages({
-    library(pacta.executive.summary)
     library(dplyr)
     library(readr)
     library(jsonlite)
@@ -275,7 +274,7 @@ run_pacta_reporting_process <- function() {
   ) {
     log_debug("Preparing data for executive summary.")
     data_aggregated_filtered <-
-      prep_data_executive_summary(
+      pacta.executive.summary::prep_data_executive_summary(
         investor_name = cfg$investor_name,
         portfolio_name = cfg$portfolio_name,
         peer_group = cfg$peer_group,
@@ -315,7 +314,7 @@ run_pacta_reporting_process <- function() {
     real_estate_flag <- (length(list.files(real_estate_dir)) > 0)
 
     log_info("Creating executive summary.")
-    render_executive_summary(
+    pacta.executive.summary::render_executive_summary(
       data = data_aggregated_filtered,
       language = cfg$language_select,
       output_dir = es_dir,
@@ -336,7 +335,7 @@ run_pacta_reporting_process <- function() {
   } else {
     # this is required for the online tool to know that the process has been completed.
     log_debug("No executive summary created.")
-    invisible(file.copy(blank_pdf(), es_dir))
+    invisible(file.copy(pacta.executive.summary::blank_pdf(), es_dir))
   }
 
   log_info("Portfolio report finished.")
