@@ -1,0 +1,5 @@
+linters: linters_with_defaults(
+    object_length_linter(35),
+    line_length_linter(120)
+  )
+
