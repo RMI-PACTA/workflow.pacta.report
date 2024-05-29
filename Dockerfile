@@ -42,7 +42,8 @@ RUN PACKAGE_PIN_DATE="2023-10-30" && \
     pkg.sysreqs_update = FALSE\n \
   )\n" \
   "$CRAN_LIKE_URL" \
-  > "${R_HOME}/etc/Rprofile.site"
+  > "${R_HOME}/etc/Rprofile.site" \
+  && Rscript -e "install.packages('pak', repos = sprintf('https://r-lib.github.io/p/pak/stable/%s/%s/%s', .Platform[['pkgType']], R.Version()[['os']], R.Version()[['arch']]))"
 
 # Create and use non-root user
 # -m creates a home directory,
@@ -60,7 +61,6 @@ COPY DESCRIPTION /workflow.pacta.report/DESCRIPTION
 # Rprofile, including CRAN-like repos are inhertied from base image
 # install pak, find dependencises from DESCRIPTION, and install them.
 RUN Rscript -e "\
-    install.packages(c('pak', 'pkgdepends')); \
     deps <- pak::local_deps(root = '/workflow.pacta.report'); \
     pkg_deps <- deps[!deps[['direct']], 'ref']; \
     print(pkg_deps); \
