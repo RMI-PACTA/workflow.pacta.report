@@ -13,7 +13,7 @@ on:
       results-url:
         description: azure blob store path for results
         required: false
-        default: "https://pactadatadev.blob.core.windows.net/ghactions-workflow-pacta-results"
+        default: "https://pactadatadev.blob.core.windows.net/ghactions-workflow-pacta-report-results"
         type: string
 
 jobs:
