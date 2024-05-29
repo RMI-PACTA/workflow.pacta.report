@@ -1,6 +1,5 @@
 run_pacta_reporting_process <- function() {
   suppressPackageStartupMessages({
-    library(pacta.portfolio.report)
     library(pacta.executive.summary)
     library(dplyr)
     library(readr)
@@ -206,7 +205,7 @@ run_pacta_reporting_process <- function() {
   template_dir <- file.path(template_path, template_dir_name)
 
   log_info("Creating interactive report.")
-  create_interactive_report(
+  pacta.portfolio.report::create_interactive_report(
     template_dir = template_dir,
     output_dir = file.path(cfg$output_dir, "report"),
     survey_dir = cfg$survey_dir,
