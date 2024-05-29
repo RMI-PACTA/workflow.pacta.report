@@ -50,70 +50,110 @@ run_pacta_reporting_process <- function() {
     filepath = file.path(cfg$output_dir, "audit_file.rds"),
     alt_return = pacta.portfolio.utils::empty_audit_file()
   )
-  audit_file <- add_inv_and_port_names_if_needed(audit_file)
+  audit_file <- add_inv_and_port_names_if_needed(
+    data = audit_file,
+    portfolio_name = cfg[["portfolio_name"]],
+    investor_name = cfg[["investor_name"]]
+  )
 
   log_debug("Loading portfolio overview.")
   portfolio_overview <- readRDS_or_return_alt_data(
     filepath = file.path(cfg$output_dir, "overview_portfolio.rds"),
     alt_return = pacta.portfolio.utils::empty_portfolio_overview()
   )
-  portfolio_overview <- add_inv_and_port_names_if_needed(portfolio_overview)
+  portfolio_overview <- add_inv_and_port_names_if_needed(
+    data = portfolio_overview,
+    portfolio_name = cfg[["portfolio_name"]],
+    investor_name = cfg[["investor_name"]]
+  )
 
   log_debug("Loading emissions.")
   emissions <- readRDS_or_return_alt_data(
     filepath = file.path(cfg$output_dir, "emissions.rds"),
     alt_return = pacta.portfolio.utils::empty_emissions_results()
   )
-  emissions <- add_inv_and_port_names_if_needed(emissions)
+  emissions <- add_inv_and_port_names_if_needed(
+    data = emissions,
+    portfolio_name = cfg[["portfolio_name"]],
+    investor_name = cfg[["investor_name"]]
+  )
 
   log_debug("Loading total portfolio results.")
   total_portfolio <- readRDS_or_return_alt_data(
     filepath = file.path(cfg$output_dir, "total_portfolio.rds"),
     alt_return = pacta.portfolio.utils::empty_portfolio_results()
   )
-  total_portfolio <- add_inv_and_port_names_if_needed(total_portfolio)
+  total_portfolio <- add_inv_and_port_names_if_needed(
+    data = total_portfolio,
+    portfolio_name = cfg[["portfolio_name"]],
+    investor_name = cfg[["investor_name"]]
+  )
 
   log_debug("Loading portfolio equity results.")
   equity_results_portfolio <- readRDS_or_return_alt_data(
     filepath = file.path(cfg$output_dir, "Equity_results_portfolio.rds"),
     alt_return = pacta.portfolio.utils::empty_portfolio_results()
   )
-  equity_results_portfolio <- add_inv_and_port_names_if_needed(equity_results_portfolio)
+  equity_results_portfolio <- add_inv_and_port_names_if_needed(
+    data = equity_results_portfolio,
+    portfolio_name = cfg[["portfolio_name"]],
+    investor_name = cfg[["investor_name"]]
+  )
 
   log_debug("Loading portfolio bonds results.")
   bonds_results_portfolio <- readRDS_or_return_alt_data(
     filepath = file.path(cfg$output_dir, "Bonds_results_portfolio.rds"),
     alt_return = pacta.portfolio.utils::empty_portfolio_results()
   )
-  bonds_results_portfolio <- add_inv_and_port_names_if_needed(bonds_results_portfolio)
+  bonds_results_portfolio <- add_inv_and_port_names_if_needed(
+    data = bonds_results_portfolio,
+    portfolio_name = cfg[["portfolio_name"]],
+    investor_name = cfg[["investor_name"]]
+  )
 
   log_debug("Loading company equity results.")
   equity_results_company <- readRDS_or_return_alt_data(
     filepath = file.path(cfg$output_dir, "Equity_results_company.rds"),
     alt_return = pacta.portfolio.utils::empty_company_results()
   )
-  equity_results_company <- add_inv_and_port_names_if_needed(equity_results_company)
+  equity_results_company <- add_inv_and_port_names_if_needed(
+    data = equity_results_company,
+    portfolio_name = cfg[["portfolio_name"]],
+    investor_name = cfg[["investor_name"]]
+  )
 
   log_debug("Loading company bonds results.")
   bonds_results_company <- readRDS_or_return_alt_data(
     filepath = file.path(cfg$output_dir, "Bonds_results_company.rds"),
     alt_return = pacta.portfolio.utils::empty_company_results()
   )
-  bonds_results_company <- add_inv_and_port_names_if_needed(bonds_results_company)
+  bonds_results_company <- add_inv_and_port_names_if_needed(
+    data = bonds_results_company,
+    portfolio_name = cfg[["portfolio_name"]],
+    investor_name = cfg[["investor_name"]]
+  )
 
   log_debug("Loading equity map results.")
   equity_results_map <- readRDS_or_return_alt_data(
     filepath = file.path(cfg$output_dir, "Equity_results_map.rds"),
     alt_return = pacta.portfolio.utils::empty_map_results()
   )
-  equity_results_map <- add_inv_and_port_names_if_needed(equity_results_map)
+  equity_results_map <- add_inv_and_port_names_if_needed(
+    data = equity_results_map,
+    portfolio_name = cfg[["portfolio_name"]],
+    investor_name = cfg[["investor_name"]]
+  )
 
   log_debug("Loading bonds map results.")
   bonds_results_map <- readRDS_or_return_alt_data(
     filepath = file.path(cfg$output_dir, "Bonds_results_map.rds"),
     alt_return = pacta.portfolio.utils::empty_map_results()
   )
-  bonds_results_map <- add_inv_and_port_names_if_needed(bonds_results_map)
+  bonds_results_map <- add_inv_and_port_names_if_needed(
+    data = bonds_results_map,
+    portfolio_name = cfg[["portfolio_name"]],
+    investor_name = cfg[["investor_name"]]
+  )
 
   log_debug("Loading portfolio equity peer results.")
   peers_equity_results_portfolio <- readRDS_or_return_alt_data(
