@@ -1,8 +1,6 @@
 run_pacta_reporting_process <- function() {
   suppressPackageStartupMessages({
-    library(dplyr)
     library(readr)
-    library(fs)
   })
 
   # defaulting to WARN to maintain current (silent) behavior.
