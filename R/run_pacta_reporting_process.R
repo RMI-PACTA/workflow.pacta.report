@@ -160,7 +160,6 @@ run_pacta_reporting_process <- function() {
 
   survey_dir <- file.path(cfg$user_results_path, cfg$project_code, "survey")
   real_estate_dir <- file.path(cfg$user_results_path, cfg$project_code, "real_estate")
-  output_dir <- file.path(cfg$output_dir)
 
   log_debug("Loading data frame label translations.")
   dataframe_translations <- readr::read_csv(
@@ -257,7 +256,6 @@ run_pacta_reporting_process <- function() {
   survey_dir <- fs::path_abs(file.path(cfg$user_results_path, cfg$project_code, "survey"))
   real_estate_dir <- fs::path_abs(file.path(cfg$user_results_path, cfg$project_code, "real_estate"))
   score_card_dir <- fs::path_abs(file.path(cfg$user_results_path, cfg$project_code, "score_card"))
-  output_dir <- file.path(cfg$output_dir)
   es_dir <- file.path(cfg$output_dir, "executive_summary")
   if (!dir.exists(es_dir)) {
     dir.create(es_dir, showWarnings = FALSE, recursive = TRUE)
