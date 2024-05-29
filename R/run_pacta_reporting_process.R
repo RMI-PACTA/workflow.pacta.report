@@ -2,7 +2,6 @@ run_pacta_reporting_process <- function() {
   suppressPackageStartupMessages({
     library(dplyr)
     library(readr)
-    library(jsonlite)
     library(fs)
   })
 
@@ -21,7 +20,7 @@ run_pacta_reporting_process <- function() {
     cfg_path <- "/workflow.pacta.report/input_dir/default_config.json"
   }
   log_debug("Loading configuration from file: \"{cfg_path}\".")
-  cfg <- fromJSON(cfg_path)
+  cfg <- jsonlite::fromJSON(cfg_path)
 
   # quit if there's no relevant PACTA assets -------------------------------------
 
