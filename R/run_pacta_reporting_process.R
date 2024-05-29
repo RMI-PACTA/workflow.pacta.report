@@ -1,4 +1,6 @@
-run_pacta_reporting_process <- function() {
+run_pacta_reporting_process <- function(
+  raw_params = commandArgs(trailingOnly = TRUE)
+) {
   suppressPackageStartupMessages({
     library(pacta.portfolio.utils)
     library(pacta.portfolio.report)
