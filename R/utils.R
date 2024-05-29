@@ -11,11 +11,11 @@ add_inv_and_port_names_if_needed <- function(data) {
   }
 
   if (!"portfolio_name" %in% names(data)) {
-    data <- mutate(data, portfolio_name = cfg$portfolio_name, .before = everything())
+    data <- dplyr::mutate(data, portfolio_name = cfg$portfolio_name, .before = dplyr::everything())
   }
 
   if (!"investor_name" %in% names(data)) {
-    data <- mutate(data, investor_name = cfg$investor_name, .before = everything())
+    data <- dplyr::mutate(data, investor_name = cfg$investor_name, .before = dplyr::everything())
   }
 
   data
