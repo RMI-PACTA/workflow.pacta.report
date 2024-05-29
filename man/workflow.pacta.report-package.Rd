@@ -6,7 +6,7 @@
 \alias{workflow.pacta.report-package}
 \title{workflow.pacta.report: Reporting functionality for PACTA}
 \description{
-Create Interactive Reports and Executive Summaries for PACTA
+Create Interactive Reports and Executive Summaries for PACTA.
 }
 \author{
 \strong{Maintainer}: Alex Axthelm \email{aaxthelm@rmi.org} (\href{https://orcid.org/0000-0001-8579-8565}{ORCID}) [contractor]
