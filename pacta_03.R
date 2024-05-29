@@ -20,7 +20,7 @@ logger::log_trace("Determining configuration file path")
 cfg_path <- commandArgs(trailingOnly = TRUE)
 if (length(cfg_path) == 0 || cfg_path == "") {
   logger::log_warn("No configuration file specified, using default")
-  cfg_path <- "input_dir/default_config.json"
+  cfg_path <- "/workflow.pacta.report/input_dir/default_config.json"
 }
 logger::log_debug("Loading configuration from file: \"{cfg_path}\".")
 cfg <- fromJSON(cfg_path)
@@ -175,7 +175,6 @@ indices_equity_results_portfolio <- readRDS(file.path(cfg$data_dir, "Indices_equ
 
 logger::log_debug("Loading index bonds portfolio results.")
 indices_bonds_results_portfolio <- readRDS(file.path(cfg$data_dir, "Indices_bonds_results_portfolio.rds"))
-
 
 # create interactive report ----------------------------------------------------
 
