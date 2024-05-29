@@ -70,5 +70,5 @@ COPY . /workflow.pacta.report/
 RUN Rscript -e "pak::local_install(root = '/workflow.pacta.report')"
 
 # set default run behavior
-ENTRYPOINT ["/run-pacta.sh"]
+ENTRYPOINT ["/workflow.pacta.report/run-pacta.sh"]
 CMD ["input_dir/default_config.json"]

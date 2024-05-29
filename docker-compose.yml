@@ -2,11 +2,11 @@
 services:
   workflow.pacta.report:
     build: .
-    stdin_open: true
-    tty: true
+    # stdin_open: true
+    # tty: true
     # entrypoint: ["R", "--args"]
     # command: '{\"portfolio_files\": \"default_portfolio.csv\", \"inherit\": \"GENERAL_2023Q4\"}'
-    entrypoint: "bash"
+    # entrypoint: "bash"
     environment:
       LOG_LEVEL: TRACE
       PACTA_DATA_DIR: "/mnt/pacta-data"
