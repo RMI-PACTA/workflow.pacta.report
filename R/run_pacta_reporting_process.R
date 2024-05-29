@@ -203,7 +203,7 @@ run_pacta_reporting_process <- function() {
   class(configs$portfolio_config) <- c(class(configs$portfolio_config), "list")
 
   log_trace("Defining interactive report template paths.")
-  template_path <- system.file("templates", package = "pacta.portfolio.report") #TODO: generalize this to accept non-builtin templates
+  template_path <- system.file("templates", package = "pacta.portfolio.report")
   template_dir_name <- paste(tolower(cfg$project_report_name), tolower(cfg$language_select), "template", sep = "_")
   template_dir <- file.path(template_path, template_dir_name)
 
