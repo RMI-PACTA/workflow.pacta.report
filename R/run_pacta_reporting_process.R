@@ -265,11 +265,18 @@ run_pacta_reporting_process <- function() {
 
   log_trace("Defining executive summary template paths.")
   exec_summary_template_name <- paste0(cfg$project_code, "_", tolower(cfg$language_select), "_exec_summary")
-  exec_summary_builtin_template_path <- system.file("extdata", exec_summary_template_name, package = "pacta.executive.summary")
+  exec_summary_builtin_template_path <- system.file(
+    "extdata", exec_summary_template_name,
+    package = "pacta.executive.summary"
+  )
   invisible(file.copy(exec_summary_builtin_template_path, cfg$output_dir, recursive = TRUE, copy.mode = FALSE))
   exec_summary_template_path <- file.path(cfg$output_dir, exec_summary_template_name)
 
-  if (dir.exists(exec_summary_template_path) && (cfg$peer_group %in% c("assetmanager", "bank", "insurance", "pensionfund"))) {
+  if (
+    dir.exists(exec_summary_template_path) && (
+      cfg$peer_group %in% c("assetmanager", "bank", "insurance", "pensionfund")
+    )
+  ) {
     log_debug("Preparing data for executive summary.")
     data_aggregated_filtered <-
       prep_data_executive_summary(
@@ -294,7 +301,7 @@ run_pacta_reporting_process <- function() {
           "Electric_HDV",
           "FuelCell_HDV",
           "Electric Arc Furnace"
-          ),
+        ),
         equity_results_portfolio = equity_results_portfolio,
         bonds_results_portfolio = bonds_results_portfolio,
         peers_equity_results_aggregated = peers_equity_results_portfolio,
