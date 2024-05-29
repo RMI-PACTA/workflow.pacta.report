@@ -80,6 +80,7 @@ jobs:
           WORKSPACE: ${{ github.workspace }}
           PARAMETERS: ${{ steps.prepare.outputs.parameters }}
         run: |
+          mkdir -p "${WORKSPACE}/${OUTPUT_DIR}"
           chmod -R 777 "${WORKSPACE}/${OUTPUT_DIR}"
           docker run \
           --network none \
