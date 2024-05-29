@@ -14,6 +14,7 @@ USER root
 RUN apt-get update \
     && DEBIAN_FRONTEND="noninteractive" \
     apt-get install -y --no-install-recommends \
+      libicu-dev=70.* \
       libpng-dev=1.6.* \
       libxt6=1:1.2.* \
       pandoc=2.9.* \
