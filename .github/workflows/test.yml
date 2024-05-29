@@ -74,7 +74,6 @@ jobs:
       - name: Run PACTA Analysis
         env:
           FULL_IMAGE_NAME: ${{ inputs.full-image-name }}
-          PORTFOLIO_DIR: portfolios
           OUTPUT_DIR: output_dir
           PACTA_DATA_DIR: pacta-data
           WORKSPACE: ${{ github.workspace }}
@@ -85,9 +84,9 @@ jobs:
           docker run \
           --network none \
           --env LOG_LEVEL=DEBUG \
+          --env PORTFOLIO_DIR=/workflow.pacta/portfolios/
           --mount type=bind,readonly,source=${WORKSPACE}/${PACTA_DATA_DIR},target=/mnt/pacta-data \
           --mount type=bind,source=${WORKSPACE}/${OUTPUT_DIR},target=/mnt/output_dir \
-          --mount type=bind,source=${WORKSPACE}/${PORTFOLIO_DIR},target=/mnt/portfolios \
           ghcr.io/rmi-pacta/workflow.pacta:main \
           $PARAMETERS
 
