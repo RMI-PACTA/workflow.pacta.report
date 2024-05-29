@@ -1,7 +1,4 @@
 run_pacta_reporting_process <- function() {
-  suppressPackageStartupMessages({
-    library(readr)
-  })
 
   # defaulting to WARN to maintain current (silent) behavior.
   logger::log_threshold(Sys.getenv("LOG_LEVEL", "WARN"))
@@ -158,13 +155,13 @@ run_pacta_reporting_process <- function() {
   log_debug("Loading data frame label translations.")
   dataframe_translations <- readr::read_csv(
     system.file("extdata/translation/dataframe_labels.csv", package = "pacta.portfolio.report"),
-    col_types = cols()
+    col_types = readr::cols()
   )
 
   log_debug("Loading data frame header translations.")
   header_dictionary <- readr::read_csv(
     system.file("extdata/translation/dataframe_headers.csv", package = "pacta.portfolio.report"),
-    col_types = cols()
+    col_types = readr::cols()
   )
 
   log_debug("Loading JavaScript label translations.")
@@ -175,7 +172,7 @@ run_pacta_reporting_process <- function() {
   log_debug("Loading sector order.")
   sector_order <- readr::read_csv(
     system.file("extdata/sector_order/sector_order.csv", package = "pacta.portfolio.report"),
-    col_types = cols()
+    col_types = readr::cols()
   )
 
   # combine config files to send to create_interactive_report()
