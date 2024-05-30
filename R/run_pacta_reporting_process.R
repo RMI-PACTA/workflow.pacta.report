@@ -191,6 +191,15 @@ run_pacta_reporting_process <- function(
 
   prepare_interactive_report(
     cfg = cfg,
+    audit_file = audit_file,
+    emissions = emissions,
+    portfolio_overview = portfolio_overview,
+    equity_results_portfolio = equity_results_portfolio,
+    bonds_results_portfolio = bonds_results_portfolio,
+    equity_results_company = equity_results_company,
+    bonds_results_company = bonds_results_company,
+    equity_results_map = equity_results_map,
+    bonds_results_map = bonds_results_map,
     indices_bonds_results_portfolio = indices_bonds_results_portfolio,
     indices_equity_results_portfolio = indices_equity_results_portfolio,
     peers_bonds_results_portfolio = peers_bonds_results_portfolio,
@@ -202,8 +211,13 @@ run_pacta_reporting_process <- function(
   # create executive summary -----------------------------------------------------
   prepare_executive_summary(
     cfg = cfg,
-    indices_bonds_results_portfolio = indices_bonds_results_portfolio,
+    total_portfolio = total_portfolio,
+    equity_results_portfolio = equity_results_portfolio,
+    bonds_results_portfolio = bonds_results_portfolio,
     indices_equity_results_portfolio = indices_equity_results_portfolio,
+    indices_bonds_results_portfolio = indices_bonds_results_portfolio,
+    audit_file = audit_file,
+    emissions = emissions,
     peers_bonds_results_portfolio = peers_bonds_results_portfolio,
     peers_bonds_results_user = peers_bonds_results_user,
     peers_equity_results_portfolio = peers_equity_results_portfolio,
