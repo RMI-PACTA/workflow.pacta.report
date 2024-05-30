@@ -190,12 +190,24 @@ run_pacta_reporting_process <- function(
   # create interactive report ----------------------------------------------------
 
   prepare_interactive_report(
-    cfg = cfg
+    cfg = cfg,
+    indices_bonds_results_portfolio = indices_bonds_results_portfolio,
+    indices_equity_results_portfolio = indices_equity_results_portfolio,
+    peers_bonds_results_portfolio = peers_bonds_results_portfolio,
+    peers_bonds_results_user = peers_bonds_results_user,
+    peers_equity_results_portfolio = peers_equity_results_portfolio,
+    peers_equity_results_user = peers_equity_results_user
   )
 
   # create executive summary -----------------------------------------------------
   prepare_executive_summary(
-    cfg = cfg
+    cfg = cfg,
+    indices_bonds_results_portfolio = indices_bonds_results_portfolio,
+    indices_equity_results_portfolio = indices_equity_results_portfolio,
+    peers_bonds_results_portfolio = peers_bonds_results_portfolio,
+    peers_bonds_results_user = peers_bonds_results_user,
+    peers_equity_results_portfolio = peers_equity_results_portfolio,
+    peers_equity_results_user = peers_equity_results_user
   )
 
   log_info("Portfolio report finished.")
