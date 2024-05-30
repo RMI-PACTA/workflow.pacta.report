@@ -164,7 +164,7 @@ jobs:
           mkdir -p /tmp/report-comment-json
           json_filename=$( \
             echo "report-comment-json-merge-$full_image_name-$config_name.json" | \
-            tr '/' '-' \
+            tr '/:._' '-' \
             )
           echo "json-filename=$json_filename" >> "$GITHUB_OUTPUT"
           json_file="/tmp/report-comment-json/$json_filename"
