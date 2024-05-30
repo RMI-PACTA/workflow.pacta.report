@@ -110,15 +110,19 @@ jobs:
         env:
           FULL_IMAGE_NAME: ${{ inputs.full-image-name }}
           OUTPUT_DIR: output_dir
+          REPORT_DIR: report
           PACTA_DATA_DIR: pacta-data
           WORKSPACE: ${{ github.workspace }}
           PARAMETERS: ${{ steps.prepare.outputs.parameters }}
         run: |
+          mkdir -p "$REPORT_DIR"
+          chmod -R 777 "$REPORT_DIR"
           docker run \
           --network none \
           --env LOG_LEVEL=DEBUG \
           --mount type=bind,readonly,source=${WORKSPACE}/${PACTA_DATA_DIR},target=/mnt/pacta-data \
           --mount type=bind,source=${WORKSPACE}/${OUTPUT_DIR},target=/mnt/output_dir \
+          --mount type=bind,source=${WORKSPACE}/${REPORT_DIR},target=/mnt/report_dir \
           $FULL_IMAGE_NAME
           # $FULL_IMAGE_NAME \
           # $PARAMETERS
