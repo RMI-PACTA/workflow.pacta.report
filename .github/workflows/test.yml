@@ -43,6 +43,10 @@ jobs:
           echo "pacta-data-url=$PACTA_DATA_URL"
           echo "pacta-data-url=$PACTA_DATA_URL" >> "$GITHUB_OUTPUT"
 
+          BENCHMARKS_URL="$(jq -rc '.benchmarksURL' $config_file)"
+          echo "benchmars-url=$BENCHMARKS_URL"
+          echo "benchmars-url=$BENCHMARKS_URL" >> "$GITHUB_OUTPUT"
+
           # includes handling for null/missing keys
           PARAMETERS="$(jq -rc '.parameters | select( . != null )' $config_file)"
           echo "parameters=$PARAMETERS"
@@ -64,9 +68,22 @@ jobs:
         with:
           # azcliversion: 2.30.0
           inlineScript: |
-            echo "pacta_data_dir: $PACTA_DATA_DATE_DIR"
             az storage copy \
               --source "$PACTA_DATA_URL/*" \
+              --destination "pacta-data" \
+              --recursive \
+              --exclude-pattern "*.sqlite"
+
+      # https://github.com/marketplace/actions/azure-cli-action#workflow-to-execute-an-azure-cli-script-of-a-specific-cli-version
+      - name: Download Benchmark Results
+        uses: azure/CLI@v2
+        env:
+          BENCHMARKS_URL: ${{ steps.prepare.outputs.benchmarks-url }}
+        with:
+          # azcliversion: 2.30.0
+          inlineScript: |
+            az storage copy \
+              --source "$BENCHMARKS_URL/*" \
               --destination "pacta-data" \
               --recursive \
               --exclude-pattern "*.sqlite"
