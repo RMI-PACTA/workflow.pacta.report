@@ -1,5 +1,16 @@
 prepare_executive_summary <- function(
-  cfg
+  cfg,
+  total_portfolio,
+  equity_results_portfolio,
+  bonds_results_portfolio,
+  indices_equity_results_portfolio,
+  indices_bonds_results_portfolio,
+  audit_file,
+  emissions,
+  peers_bonds_results_portfolio,
+  peers_bonds_results_user,
+  peers_equity_results_portfolio,
+  peers_equity_results_user
 ) {
   log_debug("Preparing to create executive summary.")
 
