@@ -161,13 +161,13 @@ jobs:
           report_url: ${{ steps.upload.outputs.report-url }}
           summary_url: ${{ env.summary-url }}
         run: |
-          mkdir -p /tmp/report-comment-json
+          mkdir -p /tmp/comment-json
           json_filename=$( \
             echo "report-comment-json-merge-$full_image_name-$config_name.json" | \
             tr '/:._' '-' \
             )
           echo "json-filename=$json_filename" >> "$GITHUB_OUTPUT"
-          json_file="/tmp/report-comment-json/$json_filename"
+          json_file="/tmp/comment-json/$json_filename"
           jq \
             -n \
             --arg commit_time "$commit_time" \
@@ -191,6 +191,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.prepare-artifact.outputs.json-filename }}
-          path: /tmp/report-comment-json/*
+          path: /tmp/comment-json/*
           if-no-files-found: error
           retention-days: 1
