@@ -149,7 +149,7 @@ jobs:
               --source "$REPORT_DIR" \
               --destination "$unique_directory" \
               --recursive
-            echo "report-url=${unique_directory}/index.html" >> "$GITHUB_OUTPUT"
+            echo "report-url=${unique_directory}/report/report/index.html" >> "$GITHUB_OUTPUT"
 
       - name: Prepare comment artifact
         id: prepare-artifact
