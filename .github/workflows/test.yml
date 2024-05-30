@@ -88,7 +88,7 @@ jobs:
           inlineScript: |
             az storage copy \
               --source "$RESULTS_URL/*" \
-              --destination "outputs/" \
+              --destination "output_dir/" \
               --recursive \
               --exclude-pattern "*.sqlite"
 
