@@ -189,10 +189,14 @@ run_pacta_reporting_process <- function(
 
   # create interactive report ----------------------------------------------------
 
-  prepare_interactive_report()
+  prepare_interactive_report(
+    cfg = cfg
+  )
 
   # create executive summary -----------------------------------------------------
-  prepare_executive_summary()
+  prepare_executive_summary(
+    cfg = cfg
+  )
 
   log_info("Portfolio report finished.")
 }

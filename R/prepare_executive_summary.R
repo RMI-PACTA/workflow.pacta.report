@@ -1,4 +1,6 @@
-prepare_executive_summary <- function(){
+prepare_executive_summary <- function(
+  cfg
+) {
   log_debug("Preparing to create executive summary.")
 
   survey_dir <- fs::path_abs(file.path(cfg$user_results_path, cfg$project_code, "survey"))
