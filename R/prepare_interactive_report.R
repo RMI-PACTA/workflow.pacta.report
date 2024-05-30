@@ -1,5 +1,20 @@
 prepare_interactive_report <- function(
-  cfg
+  cfg,
+  audit_file,
+  emissions,
+  portfolio_overview,
+  equity_results_portfolio,
+  bonds_results_portfolio,
+  equity_results_company,
+  bonds_results_company,
+  equity_results_map,
+  bonds_results_map,
+  indices_bonds_results_portfolio,
+  indices_equity_results_portfolio,
+  peers_bonds_results_portfolio,
+  peers_bonds_results_user,
+  peers_equity_results_portfolio,
+  peers_equity_results_user
 ){
   log_debug("Preparing to create interactive report.")
 
