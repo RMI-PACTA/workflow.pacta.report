@@ -29,3 +29,11 @@ jobs:
     with:
       full-image-name: ${{ needs.docker.outputs.full-image-name }}
       config-name: ${{ matrix.config-name }}
+
+  add-comment:
+    if: ${{ github.event_name == 'pull_request' }}
+    uses: RMI-PACTA/actions/.github/workflows/add-comment-table.yml@main
+    needs: [test]
+    with:
+      header: "Report Links"
+      artifact-prefix: report-comment-json
