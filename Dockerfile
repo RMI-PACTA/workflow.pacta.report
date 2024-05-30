@@ -1,75 +1,73 @@
-# using rocker r-vers as a base with R 4.3.1
-# https://hub.docker.com/r/rocker/r-ver
-# https://rocker-project.org/images/versioned/r-ver.html
-#
-# sets CRAN repo to use Posit Package Manager to freeze R package versions to
-# those available on 2023-10-30
-# https://packagemanager.posit.co/client/#/repos/2/overview
-# https://packagemanager.posit.co/cran/__linux__/jammy/2023-10-30
-
-# set proper base image
-ARG R_VERS="4.3.1"
-FROM ghcr.io/rmi-pacta/workflow.pacta:main AS base
+FROM docker.io/rocker/r-ver:4.3.1 AS base
 
 # set Docker image labels
 LABEL org.opencontainers.image.source=https://github.com/RMI-PACTA/workflow.pacta.report
-LABEL org.opencontainers.image.description="Docker image to run PACTA"
+LABEL org.opencontainers.image.description="Docker image to create PACTA reports and executive summaries"
 LABEL org.opencontainers.image.licenses=MIT
-LABEL org.opencontainers.image.title=""
-LABEL org.opencontainers.image.revision=""
-LABEL org.opencontainers.image.version=""
-LABEL org.opencontainers.image.vendor=""
-LABEL org.opencontainers.image.base.name=""
-LABEL org.opencontainers.image.ref.name=""
-LABEL org.opencontainers.image.authors=""
-
-# set apt-get to noninteractive mode
-ARG DEBIAN_FRONTEND="noninteractive"
-ARG DEBCONF_NOWARNINGS="yes"
+LABEL org.opencontainers.image.title="workflow.pacta.report"
+LABEL org.opencontainers.image.vendor="RMI"
+LABEL org.opencontainers.image.base.name="ghcr.io/rmi-pacta/workflow.pacta:main"
+LABEL org.opencontainers.image.authors="Alex Axthelm"
 
 # install system dependencies
+USER root
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
+    && DEBIAN_FRONTEND="noninteractive" \
+    apt-get install -y --no-install-recommends \
+      libicu-dev=70.* \
       libpng-dev=1.6.* \
       libxt6=1:1.2.* \
       pandoc=2.9.* \
     && chmod -R a+rwX /root \
     && rm -rf /var/lib/apt/lists/*
 
-# set frozen CRAN repo
-ARG CRAN_REPO="https://packagemanager.posit.co/cran/__linux__/jammy/2024-03-05"
-RUN echo "options(repos = c(CRAN = '$CRAN_REPO'), pkg.sysreqs = FALSE)" >> "${R_HOME}/etc/Rprofile.site" \
-      # install packages for dependency resolution and installation
-      && Rscript -e "install.packages('pak'); pak::pkg_install('renv')"
+# set frozen CRAN repo and RProfile.site
+# This block makes use of the builtin ARG $TARGETPLATFORM (See:
+# https://www.docker.com/blog/faster-multi-platform-builds-dockerfile-cross-compilation-guide/
+# ) to pick the correct CRAN-like repo, which will let us target binaries fo
+# supported platforms
+ARG TARGETPLATFORM
+RUN PACKAGE_PIN_DATE="2024-04-05" && \
+  echo "TARGETPLATFORM: $TARGETPLATFORM" && \
+  if [ "$TARGETPLATFORM" = "linux/amd64" ] && grep -q -e "Jammy Jellyfish" "/etc/os-release" ; then \
+    CRAN_LIKE_URL="https://packagemanager.posit.co/cran/__linux__/jammy/$PACKAGE_PIN_DATE"; \
+  else \
+    CRAN_LIKE_URL="https://packagemanager.posit.co/cran/$PACKAGE_PIN_DATE"; \
+  fi && \
+  echo "CRAN_LIKE_URL: $CRAN_LIKE_URL" && \
+  printf "options(\n \
+    repos = c(CRAN = '%s'),\n \
+    pak.no_extra_messages = TRUE,\n \
+    pkg.sysreqs = FALSE,\n \
+    pkg.sysreqs_db_update = FALSE,\n \
+    pkg.sysreqs_update = FALSE\n \
+  )\n" \
+  "$CRAN_LIKE_URL" \
+  > "${R_HOME}/etc/Rprofile.site" \
+  && Rscript -e "install.packages('pak', repos = sprintf('https://r-lib.github.io/p/pak/stable/%s/%s/%s', .Platform[['pkgType']], R.Version()[['os']], R.Version()[['arch']]))"
+
+# Create and use non-root user
+# -m creates a home directory,
+# -G adds user to staff group allowing R package installation.
+RUN useradd \
+      -m \
+      -G staff \
+      workflow-pacta-report
+USER workflow-pacta-report
+WORKDIR /home/workflow-pacta-report
+
+# copy in everything from this repo
+COPY DESCRIPTION /workflow.pacta.report/DESCRIPTION
+
+# Rprofile, including CRAN-like repos are inhertied from base image
+# install pak, find dependencises from DESCRIPTION, and install them.
+RUN Rscript -e "pak::local_install_deps(root = '/workflow.pacta.report')"
 
 FROM base AS install-pacta
 
-# copy in everything from this repo
-COPY DESCRIPTION /DESCRIPTION
+COPY . /workflow.pacta.report/
 
-# PACTA R package tags
-ARG report_tag="/tree/main"
-ARG summary_tag="/tree/main"
-ARG utils_tag="/tree/main"
-
-ARG report_url="https://github.com/rmi-pacta/pacta.portfolio.report"
-ARG summary_url="https://github.com/rmi-pacta/pacta.executive.summary"
-ARG utils_url="https://github.com/rmi-pacta/pacta.portfolio.utils"
-
-# install R package dependencies
-RUN Rscript -e "\
-  gh_pkgs <- \
-    c( \
-      paste0('$report_url', '$report_tag'), \
-      paste0('$summary_url', '$summary_tag'), \
-      paste0('$utils_url', '$utils_tag') \
-    ); \
-  workflow_pkgs <- renv::dependencies('DESCRIPTION')[['Package']]; \
-  workflow_pkgs <- grep('^pacta[.]', workflow_pkgs, value = TRUE, invert = TRUE); \
-  pak::pak(c(gh_pkgs, workflow_pkgs)); \
-  "
-
-COPY . /
+RUN Rscript -e "pak::local_install(root = '/workflow.pacta.report')"
 
 # set default run behavior
 ENTRYPOINT ["/run-pacta.sh"]
