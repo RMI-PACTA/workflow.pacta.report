@@ -1,7 +1,9 @@
-run_pacta_reporting_process <- function() {
+run_pacta_reporting_process <- function(
+  raw_params = commandArgs(trailingOnly = TRUE)
+) {
 
   # defaulting to WARN to maintain current (silent) behavior.
-  logger::log_threshold(Sys.getenv("LOG_LEVEL", "WARN"))
+  logger::log_threshold(Sys.getenv("LOG_LEVEL", "INFO"))
   logger::log_formatter(logger::formatter_glue)
 
   # -------------------------------------------------------------------------
