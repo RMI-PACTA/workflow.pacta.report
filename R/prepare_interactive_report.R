@@ -15,7 +15,7 @@ prepare_interactive_report <- function(
   peers_bonds_results_user,
   peers_equity_results_portfolio,
   peers_equity_results_user
-){
+) {
   log_debug("Preparing to create interactive report.")
 
   survey_dir <- file.path(cfg$user_results_path, cfg$project_code, "survey")
