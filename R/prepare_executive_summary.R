@@ -60,7 +60,7 @@ prepare_executive_summary <- function(
           "Electric_HDV",
           "FuelCell_HDV",
           "Electric Arc Furnace"
-          ),
+        ),
         equity_results_portfolio = equity_results_portfolio,
         bonds_results_portfolio = bonds_results_portfolio,
         peers_equity_results_aggregated = peers_equity_results_portfolio,
