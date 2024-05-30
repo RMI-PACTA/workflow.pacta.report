@@ -18,9 +18,6 @@ prepare_interactive_report <- function(
 ) {
   log_debug("Preparing to create interactive report.")
 
-  survey_dir <- file.path(cfg$user_results_path, cfg$project_code, "survey")
-  real_estate_dir <- file.path(cfg$user_results_path, cfg$project_code, "real_estate")
-
   log_debug("Loading data frame label translations.")
   dataframe_translations <- readr::read_csv(
     system.file("extdata/translation/dataframe_labels.csv", package = "pacta.portfolio.report"),
