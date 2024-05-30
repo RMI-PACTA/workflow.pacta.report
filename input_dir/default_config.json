@@ -2,6 +2,7 @@
   "data_dir": "/mnt/pacta-data/",
   "portfolio_path": "/mnt/input_dir/default_portfolio.csv",
   "output_dir": "/mnt/output_dir",
+  "report_dir": "/mnt/report_dir",
   "start_year": 2023,
   "equity_market_list": [
     "GlobalMarket",

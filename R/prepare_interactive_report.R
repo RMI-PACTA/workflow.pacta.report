@@ -66,7 +66,7 @@ prepare_interactive_report <- function(
   log_info("Creating interactive report.")
   pacta.portfolio.report::create_interactive_report(
     template_dir = template_dir,
-    output_dir = file.path(cfg$output_dir, "report"),
+    output_dir = cfg$report_dir,
     survey_dir = cfg$survey_dir,
     real_estate_dir = cfg$real_estate_dir,
     language_select = cfg$language_select,
