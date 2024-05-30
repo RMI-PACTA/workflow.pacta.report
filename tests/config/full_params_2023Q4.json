@@ -1,6 +1,7 @@
 {
   "holdingsDate": "2023Q4",
   "pactaDataURL": "https://pactadatadev.file.core.windows.net/workflow-data-preparation-outputs/2023Q4_20240424T120055Z",
+  "resultsURL": "https://pactadatadev.blob.core.windows.net/ghactions-workflow-pacta-report-results/17/merge/38/2/default_2023Q4/workflow.pacta.report/output_dir/report/report/index.html",
   "benchmarksURL": "https://pactadatadev.file.core.windows.net/workflow-prepare-pacta-indices-outputs/2023Q4_20240529T002355Z",
   "parameters": {
     "equity_market_list": ["GlobalMarket", "DevelopedMarket", "EmergingMarket"],

@@ -47,6 +47,10 @@ jobs:
           echo "benchmarks-url=$BENCHMARKS_URL"
           echo "benchmarks-url=$BENCHMARKS_URL" >> "$GITHUB_OUTPUT"
 
+          RESULTS_URL="$(jq -rc '.resultsURL' $config_file)"
+          echo "results-url=$RESULTS_URL"
+          echo "results-url=$RESULTS_URL" >> "$GITHUB_OUTPUT"
+
           # includes handling for null/missing keys
           PARAMETERS="$(jq -rc '.parameters | select( . != null )' $config_file)"
           echo "parameters=$PARAMETERS"
@@ -75,6 +79,20 @@ jobs:
               --exclude-pattern "*.sqlite"
 
       # https://github.com/marketplace/actions/azure-cli-action#workflow-to-execute-an-azure-cli-script-of-a-specific-cli-version
+      - name: Download outputs from worfklow.pacta
+        uses: azure/CLI@v2
+        env:
+          RESULTS_URL: ${{ steps.prepare.outputs.results-url }}
+        with:
+          # azcliversion: 2.30.0
+          inlineScript: |
+            az storage copy \
+              --source "$BENCHMARKS_URL/*" \
+              --destination "outputs/" \
+              --recursive \
+              --exclude-pattern "*.sqlite"
+
+      # https://github.com/marketplace/actions/azure-cli-action#workflow-to-execute-an-azure-cli-script-of-a-specific-cli-version
       - name: Download Benchmark Results
         uses: azure/CLI@v2
         env:
@@ -87,42 +105,6 @@ jobs:
               --destination "pacta-data" \
               --recursive \
               --exclude-pattern "*.sqlite"
-
-      - name: Run PACTA Analysis
-        env:
-          FULL_IMAGE_NAME: ${{ inputs.full-image-name }}
-          OUTPUT_DIR: output_dir
-          PACTA_DATA_DIR: pacta-data
-          WORKSPACE: ${{ github.workspace }}
-          PARAMETERS: ${{ steps.prepare.outputs.parameters }}
-        run: |
-          mkdir -p "${WORKSPACE}/${OUTPUT_DIR}"
-          chmod -R 777 "${WORKSPACE}/${OUTPUT_DIR}"
-          docker run \
-          --network none \
-          --env LOG_LEVEL=DEBUG \
-          --env PORTFOLIO_DIR=/workflow.pacta/portfolios/ \
-          --mount type=bind,readonly,source=${WORKSPACE}/${PACTA_DATA_DIR},target=/mnt/pacta-data \
-          --mount type=bind,source=${WORKSPACE}/${OUTPUT_DIR},target=/mnt/output_dir \
-          ghcr.io/rmi-pacta/workflow.pacta:main \
-          $PARAMETERS
-
-      - name: Run Docker Image
-        env:
-          FULL_IMAGE_NAME: ${{ inputs.full-image-name }}
-          OUTPUT_DIR: output_dir
-          PACTA_DATA_DIR: pacta-data
-          WORKSPACE: ${{ github.workspace }}
-          PARAMETERS: ${{ steps.prepare.outputs.parameters }}
-        run: |
-          docker run \
-          --network none \
-          --env LOG_LEVEL=DEBUG \
-          --mount type=bind,readonly,source=${WORKSPACE}/${PACTA_DATA_DIR},target=/mnt/pacta-data \
-          --mount type=bind,source=${WORKSPACE}/${OUTPUT_DIR},target=/mnt/output_dir \
-          $FULL_IMAGE_NAME
-          # $FULL_IMAGE_NAME \
-          # $PARAMETERS
 
       - name: List outputs
         run: |
