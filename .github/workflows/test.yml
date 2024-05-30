@@ -61,6 +61,20 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       # https://github.com/marketplace/actions/azure-cli-action#workflow-to-execute-an-azure-cli-script-of-a-specific-cli-version
+      - name: Download pacta-data
+        uses: azure/CLI@v2
+        env:
+          PACTA_DATA_URL: ${{ steps.prepare.outputs.pacta-data-url }}
+        with:
+          # azcliversion: 2.30.0
+          inlineScript: |
+            az storage copy \
+              --source "$PACTA_DATA_URL/manifest.json" \
+              --destination "pacta-data/manifest.json" \
+              --recursive \
+              --exclude-pattern "*.sqlite"
+
+      # https://github.com/marketplace/actions/azure-cli-action#workflow-to-execute-an-azure-cli-script-of-a-specific-cli-version
       - name: Download outputs from workflow.pacta
         uses: azure/CLI@v2
         env:
