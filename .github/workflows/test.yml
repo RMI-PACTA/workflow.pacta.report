@@ -139,12 +139,12 @@ jobs:
           GITHUB_REF_NAME: ${{ github.ref_name}}
           GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
           GITHUB_RUN_NUMBER: ${{ github.run_number }}
-          OUTPUTS_DIR: "output_dir"
+          REPORT_DIR: report
           RESULTS_URL: ${{ inputs.results-url }}
         with:
           inlineScript: |
             unique_directory="$RESULTS_URL/$GITHUB_REF_NAME/$GITHUB_RUN_NUMBER/$GITHUB_RUN_ATTEMPT/$CONFIG_NAME"
             az storage copy \
-              --source "$outputs_dir" \
+              --source "$REPORT_DIR" \
               --destination "$unique_directory" \
               --recursive
