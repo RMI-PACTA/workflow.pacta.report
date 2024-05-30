@@ -39,6 +39,10 @@ jobs:
           echo "holdings-date=$HOLDINGS_DATE"
           echo "holdings-date=$HOLDINGS_DATE" >> "$GITHUB_OUTPUT"
 
+          PACTA_DATA_URL="$(jq -rc '.pactaDataURL' $config_file)"
+          echo "pacta-data-url=$PACTA_DATA_URL"
+          echo "pacta-data-url=$PACTA_DATA_URL" >> "$GITHUB_OUTPUT"
+
           BENCHMARKS_URL="$(jq -rc '.benchmarksURL' $config_file)"
           echo "benchmarks-url=$BENCHMARKS_URL"
           echo "benchmarks-url=$BENCHMARKS_URL" >> "$GITHUB_OUTPUT"
