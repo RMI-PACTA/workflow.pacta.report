@@ -162,11 +162,11 @@ jobs:
           summary_url: ${{ env.summary-url }}
         run: |
           mkdir -p /tmp/comment-json
-          json_filename=$( \
+          json_filename="$( \
             echo "report-comment-json-merge-$full_image_name-$config_name" | \
             tr '/:._' '-' \
-            )
-          echo "json-filename=${json_filename}.json" >> "$GITHUB_OUTPUT"
+            ).json"
+          echo "json-filename=$json_filename" >> "$GITHUB_OUTPUT"
           json_file="/tmp/comment-json/$json_filename"
           jq \
             -n \
