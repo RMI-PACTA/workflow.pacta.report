@@ -39,10 +39,6 @@ jobs:
           echo "holdings-date=$HOLDINGS_DATE"
           echo "holdings-date=$HOLDINGS_DATE" >> "$GITHUB_OUTPUT"
 
-          PACTA_DATA_URL="$(jq -rc '.pactaDataURL' $config_file)"
-          echo "pacta-data-url=$PACTA_DATA_URL"
-          echo "pacta-data-url=$PACTA_DATA_URL" >> "$GITHUB_OUTPUT"
-
           BENCHMARKS_URL="$(jq -rc '.benchmarksURL' $config_file)"
           echo "benchmarks-url=$BENCHMARKS_URL"
           echo "benchmarks-url=$BENCHMARKS_URL" >> "$GITHUB_OUTPUT"
@@ -63,20 +59,6 @@ jobs:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-
-      # https://github.com/marketplace/actions/azure-cli-action#workflow-to-execute-an-azure-cli-script-of-a-specific-cli-version
-      - name: Download pacta-data
-        uses: azure/CLI@v2
-        env:
-          PACTA_DATA_URL: ${{ steps.prepare.outputs.pacta-data-url }}
-        with:
-          # azcliversion: 2.30.0
-          inlineScript: |
-            az storage copy \
-              --source "$PACTA_DATA_URL/*" \
-              --destination "pacta-data" \
-              --recursive \
-              --exclude-pattern "*.sqlite"
 
       # https://github.com/marketplace/actions/azure-cli-action#workflow-to-execute-an-azure-cli-script-of-a-specific-cli-version
       - name: Download outputs from workflow.pacta
