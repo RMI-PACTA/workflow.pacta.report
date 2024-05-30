@@ -79,7 +79,7 @@ jobs:
               --exclude-pattern "*.sqlite"
 
       # https://github.com/marketplace/actions/azure-cli-action#workflow-to-execute-an-azure-cli-script-of-a-specific-cli-version
-      - name: Download outputs from worfklow.pacta
+      - name: Download outputs from workflow.pacta
         uses: azure/CLI@v2
         env:
           RESULTS_URL: ${{ steps.prepare.outputs.results-url }}
@@ -87,7 +87,7 @@ jobs:
           # azcliversion: 2.30.0
           inlineScript: |
             az storage copy \
-              --source "$BENCHMARKS_URL/*" \
+              --source "$RESULTS_URL/*" \
               --destination "outputs/" \
               --recursive \
               --exclude-pattern "*.sqlite"
