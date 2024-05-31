@@ -1,10 +1,27 @@
 run_pacta_reporting_process <- function(
   raw_params = commandArgs(trailingOnly = TRUE),
-  analysis_outputs_dir = Sys.getenv("ANALYSIS_OUTPUTS_DIR"),
+  analysis_output_dir = Sys.getenv("ANALYSIS_OUTPUTS_DIR"),
   benchmarks_dir = Sys.getenv("BENCHMARKS_DIR"),
   report_output_dir = Sys.getenv("REPORT_OUTPUT_DIR"),
   summary_output_dir = Sys.getenv("SUMMARY_OUTPUT_DIR")
 ) {
+  log_debug("Checking configuration.")
+  if (is.null(analysis_output_dir) || analysis_output_dir == "") {
+    log_error("ANALYSIS_OUTPUTS_DIR not set.")
+    stop("ANALYSIS_OUTPUTS_DIR not set.")
+  }
+  if (is.null(benchmarks_dir) || benchmarks_dir == "") {
+    log_error("BENCHMARKS_DIR not set.")
+    stop("BENCHMARKS_DIR not set.")
+  }
+  if (is.null(report_output_dir) || report_output_dir == "") {
+    log_error("REPORT_OUTPUT_DIR not set.")
+    stop("REPORT_OUTPUT_DIR not set.")
+  }
+  if (is.null(summary_output_dir) || summary_output_dir == "") {
+    log_error("SUMMARY_OUTPUT_DIR not set.")
+    stop("SUMMARY_OUTPUT_DIR not set.")
+  }
 
   # defaulting to WARN to maintain current (silent) behavior.
   logger::log_threshold(Sys.getenv("LOG_LEVEL", "INFO"))
@@ -26,7 +43,7 @@ run_pacta_reporting_process <- function(
   # quit if there's no relevant PACTA assets -------------------------------------
 
   log_debug("Checking for PACTA relevant data in portfolio results.")
-  total_portfolio_path <- file.path(analysis_outputs_dir, "total_portfolio.rds")
+  total_portfolio_path <- file.path(analysis_output_dir, "total_portfolio.rds")
   if (file.exists(total_portfolio_path)) {
     total_portfolio <- readRDS(total_portfolio_path)
     log_trace("Checking for PACTA relevant data in file: \"{total_portfolio_path}\".")
@@ -53,7 +70,7 @@ run_pacta_reporting_process <- function(
 
   log_debug("Loading audit file.")
   audit_file <- read_rds_or_return_alt_data(
-    filepath = file.path(analysis_outputs_dir, "audit_file.rds"),
+    filepath = file.path(analysis_output_dir, "audit_file.rds"),
     alt_return = pacta.portfolio.utils::empty_audit_file()
   )
   audit_file <- add_inv_and_port_names_if_needed(
@@ -64,7 +81,7 @@ run_pacta_reporting_process <- function(
 
   log_debug("Loading portfolio overview.")
   portfolio_overview <- read_rds_or_return_alt_data(
-    filepath = file.path(analysis_outputs_dir, "overview_portfolio.rds"),
+    filepath = file.path(analysis_output_dir, "overview_portfolio.rds"),
     alt_return = pacta.portfolio.utils::empty_portfolio_overview()
   )
   portfolio_overview <- add_inv_and_port_names_if_needed(
@@ -75,7 +92,7 @@ run_pacta_reporting_process <- function(
 
   log_debug("Loading emissions.")
   emissions <- read_rds_or_return_alt_data(
-    filepath = file.path(analysis_outputs_dir, "emissions.rds"),
+    filepath = file.path(analysis_output_dir, "emissions.rds"),
     alt_return = pacta.portfolio.utils::empty_emissions_results()
   )
   emissions <- add_inv_and_port_names_if_needed(
@@ -86,7 +103,7 @@ run_pacta_reporting_process <- function(
 
   log_debug("Loading total portfolio results.")
   total_portfolio <- read_rds_or_return_alt_data(
-    filepath = file.path(analysis_outputs_dir, "total_portfolio.rds"),
+    filepath = file.path(analysis_output_dir, "total_portfolio.rds"),
     alt_return = pacta.portfolio.utils::empty_portfolio_results()
   )
   total_portfolio <- add_inv_and_port_names_if_needed(
@@ -97,7 +114,7 @@ run_pacta_reporting_process <- function(
 
   log_debug("Loading portfolio equity results.")
   equity_results_portfolio <- read_rds_or_return_alt_data(
-    filepath = file.path(analysis_outputs_dir, "Equity_results_portfolio.rds"),
+    filepath = file.path(analysis_output_dir, "Equity_results_portfolio.rds"),
     alt_return = pacta.portfolio.utils::empty_portfolio_results()
   )
   equity_results_portfolio <- add_inv_and_port_names_if_needed(
@@ -108,7 +125,7 @@ run_pacta_reporting_process <- function(
 
   log_debug("Loading portfolio bonds results.")
   bonds_results_portfolio <- read_rds_or_return_alt_data(
-    filepath = file.path(analysis_outputs_dir, "Bonds_results_portfolio.rds"),
+    filepath = file.path(analysis_output_dir, "Bonds_results_portfolio.rds"),
     alt_return = pacta.portfolio.utils::empty_portfolio_results()
   )
   bonds_results_portfolio <- add_inv_and_port_names_if_needed(
@@ -119,7 +136,7 @@ run_pacta_reporting_process <- function(
 
   log_debug("Loading company equity results.")
   equity_results_company <- read_rds_or_return_alt_data(
-    filepath = file.path(analysis_outputs_dir, "Equity_results_company.rds"),
+    filepath = file.path(analysis_output_dir, "Equity_results_company.rds"),
     alt_return = pacta.portfolio.utils::empty_company_results()
   )
   equity_results_company <- add_inv_and_port_names_if_needed(
@@ -130,7 +147,7 @@ run_pacta_reporting_process <- function(
 
   log_debug("Loading company bonds results.")
   bonds_results_company <- read_rds_or_return_alt_data(
-    filepath = file.path(analysis_outputs_dir, "Bonds_results_company.rds"),
+    filepath = file.path(analysis_output_dir, "Bonds_results_company.rds"),
     alt_return = pacta.portfolio.utils::empty_company_results()
   )
   bonds_results_company <- add_inv_and_port_names_if_needed(
@@ -141,7 +158,7 @@ run_pacta_reporting_process <- function(
 
   log_debug("Loading equity map results.")
   equity_results_map <- read_rds_or_return_alt_data(
-    filepath = file.path(analysis_outputs_dir, "Equity_results_map.rds"),
+    filepath = file.path(analysis_output_dir, "Equity_results_map.rds"),
     alt_return = pacta.portfolio.utils::empty_map_results()
   )
   equity_results_map <- add_inv_and_port_names_if_needed(
@@ -152,7 +169,7 @@ run_pacta_reporting_process <- function(
 
   log_debug("Loading bonds map results.")
   bonds_results_map <- read_rds_or_return_alt_data(
-    filepath = file.path(analysis_outputs_dir, "Bonds_results_map.rds"),
+    filepath = file.path(analysis_output_dir, "Bonds_results_map.rds"),
     alt_return = pacta.portfolio.utils::empty_map_results()
   )
   bonds_results_map <- add_inv_and_port_names_if_needed(

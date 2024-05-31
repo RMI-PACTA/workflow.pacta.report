@@ -10,19 +10,24 @@ services:
     # command: "/workflow.pacta.report/input_dir/default_config.json"
     environment:
       LOG_LEVEL: TRACE
-      PACTA_DATA_DIR: "/mnt/pacta-data"
-      OUTPUT_DIR: "/mnt/output_dir"
-      PORTFOLIO_DIR: "/mnt/portfolios"
+      ANALYSIS_OUTPUTS_DIR: "/mnt/analysis_output_dir"
+      BENCHMARKS_DIR: "/mnt/benchmarks_dir"
+      REPORT_OUTPUT_DIR: "/mnt/report_output_dir"
+      SUMMARY_OUTPUT_DIR: "/mnt/summary_output_dir"
     volumes:
       - type: bind
         source: ${data_dir:-./pacta-data}
         target: /mnt/pacta-data/
         read_only: true
       - type: bind
-        source: ${output_dir:-./output_dir}
-        target: /mnt/output_dir
-        read_only: false
-      # - type: bind
-      #   source: ${input_dir:-./portfolios}
-      #   target: /mnt/portfolios
-      #   read_only: true
+        source: ${analysis_output_dir:-./analysis_output_dir}
+        target: /mnt/analysis_output_dir
+        read_only: true
+      - type: bind
+        source: ${report_output_dir:-./report_outputs_dir}
+        target: /mnt/report_output_dir
+        read_only: true
+      - type: bind
+        source: ${summary_output_dir:-./summary_outputs_dir}
+        target: /mnt/summary_output_dir
+        read_only: true

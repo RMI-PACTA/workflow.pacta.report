@@ -3,6 +3,7 @@
 
 ## usethis namespace: start
 #' @importFrom logger log_debug
+#' @importFrom logger log_error
 #' @importFrom logger log_fatal
 #' @importFrom logger log_info
 #' @importFrom logger log_trace
