@@ -3,7 +3,9 @@ run_pacta_reporting_process <- function(
   analysis_output_dir = Sys.getenv("ANALYSIS_OUTPUT_DIR"),
   benchmarks_dir = Sys.getenv("BENCHMARKS_DIR"),
   report_output_dir = Sys.getenv("REPORT_OUTPUT_DIR"),
-  summary_output_dir = Sys.getenv("SUMMARY_OUTPUT_DIR")
+  summary_output_dir = Sys.getenv("SUMMARY_OUTPUT_DIR"),
+  real_estate_dir = Sys.getenv("REAL_ESTATE_DIR"),
+  survey_dir = Sys.getenv("SURVEY_DIR")
 ) {
   log_debug("Checking configuration.")
   if (is.null(analysis_output_dir) || analysis_output_dir == "") {

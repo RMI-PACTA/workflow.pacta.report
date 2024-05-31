@@ -6,14 +6,15 @@ services:
     # tty: true
     # entrypoint: ["R", "--args"]
     # command: '{\"portfolio_files\": \"default_portfolio.csv\", \"inherit\": \"GENERAL_2023Q4\"}'
-    # entrypoint: "bash"
-    # command: "/workflow.pacta.report/input_dir/default_config.json"
+    command: "/workflow.pacta.report/inst/extdata/parameters/default.json"
     environment:
       LOG_LEVEL: TRACE
       ANALYSIS_OUTPUT_DIR: "/mnt/analysis_output_dir"
       BENCHMARKS_DIR: "/mnt/benchmarks_dir"
       REPORT_OUTPUT_DIR: "/mnt/report_output_dir"
       SUMMARY_OUTPUT_DIR: "/mnt/summary_output_dir"
+      REAL_ESTATE_DIR: "/mnt/real_estate_dir"
+      SURVEY_DIR: "/mnt/survey_dir"
     volumes:
       - type: bind
         source: ${benchmarks_dir:-./benchmarks_dir}

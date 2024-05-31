@@ -101,11 +101,18 @@ jobs:
           SUMMARY_OUTPUT_DIR: summary_output_dir
           WORKSPACE: ${{ github.workspace }}
           PARAMETERS: ${{ steps.prepare.outputs.parameters }}
+          REAL_ESTATE_DIR: "/mnt/real_estate_dir"
+          SURVEY_DIR: "/mnt/survey_dir"
         run: |
           mkdir -p "$REPORT_OUTPUT_DIR"
           chmod -R 777 "$REPORT_OUTPUT_DIR"
           mkdir -p "$SUMMARY_OUTPUT_DIR"
           chmod -R 777 "$SUMMARY_OUTPUT_DIR"
+          mkdir -p "$REAL_ESTATE_DIR"
+          chmod -R 777 "$REAL_ESTATE_DIR"
+          mkdir -p "$SURVEY_DIR"
+          chmod -R 777 "$SURVEY_DIR"
+
           docker run \
           --network none \
           --env LOG_LEVEL=TRACE \

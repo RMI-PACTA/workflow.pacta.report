@@ -40,8 +40,5 @@
     "Electric",
     "FuelCell",
     "Electric Arc Furnace"
-  ],
-  "user_results_path": "input_dir/user_results",
-  "real_estate_dir": "input_dir/real_estate",
-  "survey_dir": "input_dir/survey"
+  ]
 }
