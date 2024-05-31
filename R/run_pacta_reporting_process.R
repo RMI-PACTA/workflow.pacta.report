@@ -178,6 +178,8 @@ run_pacta_reporting_process <- function(
     investor_name = cfg[["investor_name"]]
   )
 
+  analysis_output_manifest <- jsonlite::read_json(file.path(analysis_output_dir, "manifest.json"))
+
   log_debug("Loading portfolio equity peer results.")
   peers_equity_results_portfolio <- read_rds_or_return_alt_data(
     filepath = file.path(benchmarks_dir, paste0(cfg$project_code, "_peers_equity_results_portfolio.rds")),
@@ -212,6 +214,7 @@ run_pacta_reporting_process <- function(
 
   prepare_interactive_report(
     cfg = cfg,
+    report_output_dir = report_output_dir,
     audit_file = audit_file,
     emissions = emissions,
     portfolio_overview = portfolio_overview,
@@ -226,12 +229,14 @@ run_pacta_reporting_process <- function(
     peers_bonds_results_portfolio = peers_bonds_results_portfolio,
     peers_bonds_results_user = peers_bonds_results_user,
     peers_equity_results_portfolio = peers_equity_results_portfolio,
-    peers_equity_results_user = peers_equity_results_user
+    peers_equity_results_user = peers_equity_results_user,
+    analysis_output_manifest = analysis_output_manifest
   )
 
   # create executive summary -----------------------------------------------------
   prepare_executive_summary(
     cfg = cfg,
+    summary_output_dir = summary_output_dir,
     total_portfolio = total_portfolio,
     equity_results_portfolio = equity_results_portfolio,
     bonds_results_portfolio = bonds_results_portfolio,

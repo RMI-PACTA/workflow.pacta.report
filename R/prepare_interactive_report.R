@@ -1,5 +1,6 @@
 prepare_interactive_report <- function(
   cfg,
+  report_output_dir,
   audit_file,
   emissions,
   portfolio_overview,
@@ -14,7 +15,8 @@ prepare_interactive_report <- function(
   peers_bonds_results_portfolio,
   peers_bonds_results_user,
   peers_equity_results_portfolio,
-  peers_equity_results_user
+  peers_equity_results_user,
+  analysis_output_manifest
 ) {
   log_debug("Preparing to create interactive report.")
 
@@ -43,16 +45,11 @@ prepare_interactive_report <- function(
 
   # combine config files to send to create_interactive_report()
   log_trace("Defining configs and manifest.")
-  pacta_data_public_manifest <-
-    list(
-      creation_time_date = jsonlite::read_json(file.path(cfg$data_dir, "manifest.json"))$creation_time_date,
-      outputs_manifest = jsonlite::read_json(file.path(cfg$data_dir, "manifest.json"))$outputs_manifest
-    )
 
   configs <-
     list(
       portfolio_config = cfg,
-      pacta_data_public_manifest = pacta_data_public_manifest
+      analysis_output_manifest = analysis_output_manifest
     )
 
   # workaround a bug in {config} v0.3.2 that only adds "config" class to objects it creates
@@ -66,7 +63,7 @@ prepare_interactive_report <- function(
   log_info("Creating interactive report.")
   pacta.portfolio.report::create_interactive_report(
     template_dir = template_dir,
-    output_dir = cfg$report_dir,
+    output_dir = report_output_dir,
     survey_dir = cfg$survey_dir,
     real_estate_dir = cfg$real_estate_dir,
     language_select = cfg$language_select,

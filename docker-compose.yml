@@ -16,18 +16,18 @@ services:
       SUMMARY_OUTPUT_DIR: "/mnt/summary_output_dir"
     volumes:
       - type: bind
-        source: ${data_dir:-./pacta-data}
-        target: /mnt/pacta-data/
+        source: ${benchmarks_dir:-./benchmarks_dir}
+        target: /mnt/benchmarks_dir/
         read_only: true
       - type: bind
         source: ${analysis_output_dir:-./analysis_output_dir}
         target: /mnt/analysis_output_dir
         read_only: true
       - type: bind
-        source: ${report_output_dir:-./report_outputs_dir}
+        source: ${report_output_dir:-./report_output_dir}
         target: /mnt/report_output_dir
-        read_only: true
+        read_only: false
       - type: bind
-        source: ${summary_output_dir:-./summary_outputs_dir}
+        source: ${summary_output_dir:-./summary_output_dir}
         target: /mnt/summary_output_dir
-        read_only: true
+        read_only: false
