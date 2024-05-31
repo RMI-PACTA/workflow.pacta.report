@@ -65,20 +65,6 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       # https://github.com/marketplace/actions/azure-cli-action#workflow-to-execute-an-azure-cli-script-of-a-specific-cli-version
-      - name: Download pacta-data
-        uses: azure/CLI@v2
-        env:
-          PACTA_DATA_URL: ${{ steps.prepare.outputs.pacta-data-url }}
-        with:
-          # azcliversion: 2.30.0
-          inlineScript: |
-            az storage copy \
-              --source "$PACTA_DATA_URL/manifest.json" \
-              --destination "pacta-data/manifest.json" \
-              --recursive \
-              --exclude-pattern "*.sqlite"
-
-      # https://github.com/marketplace/actions/azure-cli-action#workflow-to-execute-an-azure-cli-script-of-a-specific-cli-version
       - name: Download outputs from workflow.pacta
         uses: azure/CLI@v2
         env:
@@ -88,7 +74,7 @@ jobs:
           inlineScript: |
             az storage copy \
               --source "$RESULTS_URL/*" \
-              --destination "output_dir/" \
+              --destination "analysis_output_dir/" \
               --recursive \
               --exclude-pattern "*.sqlite"
 
@@ -102,16 +88,17 @@ jobs:
           inlineScript: |
             az storage copy \
               --source "$BENCHMARKS_URL/*" \
-              --destination "pacta-data" \
+              --destination "benchmarks_dir/" \
               --recursive \
               --exclude-pattern "*.sqlite"
 
       - name: Run Docker Image
         env:
           FULL_IMAGE_NAME: ${{ inputs.full-image-name }}
-          OUTPUT_DIR: output_dir
-          REPORT_DIR: report
-          PACTA_DATA_DIR: pacta-data
+          ANALYSIS_OUTPUT_DIR: analysis_output_dir
+          BENCHMARKS_DIR: benchmarks_dir
+          REPORT_OUTPUT_DIR: report_output_dir
+          SUMMARY_OUTPUT_DIR: summary_output_dir
           WORKSPACE: ${{ github.workspace }}
           PARAMETERS: ${{ steps.prepare.outputs.parameters }}
         run: |
@@ -134,7 +121,8 @@ jobs:
 
       - name: List outputs
         run: |
-          ls -lR output_dir
+          ls -lR report_output_dir
+          ls -lR summary_output_dir
 
       # https://github.com/marketplace/actions/azure-cli-action#workflow-to-execute-an-azure-cli-script-of-a-specific-cli-version
       - name: Upload results to blob store
