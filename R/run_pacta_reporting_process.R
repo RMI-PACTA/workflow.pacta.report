@@ -108,8 +108,8 @@ run_pacta_reporting_process <- function(
   )
   audit_file <- add_inv_and_port_names_if_needed(
     data = audit_file,
-    portfolio_name = cfg[["portfolio_name"]],
-    investor_name = cfg[["investor_name"]]
+    portfolio_name = params[["portfolio_name"]],
+    investor_name = params[["investor_name"]]
   )
 
   log_debug("Loading portfolio overview.")
@@ -119,8 +119,8 @@ run_pacta_reporting_process <- function(
   )
   portfolio_overview <- add_inv_and_port_names_if_needed(
     data = portfolio_overview,
-    portfolio_name = cfg[["portfolio_name"]],
-    investor_name = cfg[["investor_name"]]
+    portfolio_name = params[["portfolio_name"]],
+    investor_name = params[["investor_name"]]
   )
 
   log_debug("Loading emissions.")
@@ -130,8 +130,8 @@ run_pacta_reporting_process <- function(
   )
   emissions <- add_inv_and_port_names_if_needed(
     data = emissions,
-    portfolio_name = cfg[["portfolio_name"]],
-    investor_name = cfg[["investor_name"]]
+    portfolio_name = params[["portfolio_name"]],
+    investor_name = params[["investor_name"]]
   )
 
   log_debug("Loading total portfolio results.")
@@ -141,8 +141,8 @@ run_pacta_reporting_process <- function(
   )
   total_portfolio <- add_inv_and_port_names_if_needed(
     data = total_portfolio,
-    portfolio_name = cfg[["portfolio_name"]],
-    investor_name = cfg[["investor_name"]]
+    portfolio_name = params[["portfolio_name"]],
+    investor_name = params[["investor_name"]]
   )
 
   log_debug("Loading portfolio equity results.")
@@ -152,8 +152,8 @@ run_pacta_reporting_process <- function(
   )
   equity_results_portfolio <- add_inv_and_port_names_if_needed(
     data = equity_results_portfolio,
-    portfolio_name = cfg[["portfolio_name"]],
-    investor_name = cfg[["investor_name"]]
+    portfolio_name = params[["portfolio_name"]],
+    investor_name = params[["investor_name"]]
   )
 
   log_debug("Loading portfolio bonds results.")
@@ -163,8 +163,8 @@ run_pacta_reporting_process <- function(
   )
   bonds_results_portfolio <- add_inv_and_port_names_if_needed(
     data = bonds_results_portfolio,
-    portfolio_name = cfg[["portfolio_name"]],
-    investor_name = cfg[["investor_name"]]
+    portfolio_name = params[["portfolio_name"]],
+    investor_name = params[["investor_name"]]
   )
 
   log_debug("Loading company equity results.")
@@ -174,8 +174,8 @@ run_pacta_reporting_process <- function(
   )
   equity_results_company <- add_inv_and_port_names_if_needed(
     data = equity_results_company,
-    portfolio_name = cfg[["portfolio_name"]],
-    investor_name = cfg[["investor_name"]]
+    portfolio_name = params[["portfolio_name"]],
+    investor_name = params[["investor_name"]]
   )
 
   log_debug("Loading company bonds results.")
@@ -185,8 +185,8 @@ run_pacta_reporting_process <- function(
   )
   bonds_results_company <- add_inv_and_port_names_if_needed(
     data = bonds_results_company,
-    portfolio_name = cfg[["portfolio_name"]],
-    investor_name = cfg[["investor_name"]]
+    portfolio_name = params[["portfolio_name"]],
+    investor_name = params[["investor_name"]]
   )
 
   log_debug("Loading equity map results.")
@@ -196,8 +196,8 @@ run_pacta_reporting_process <- function(
   )
   equity_results_map <- add_inv_and_port_names_if_needed(
     data = equity_results_map,
-    portfolio_name = cfg[["portfolio_name"]],
-    investor_name = cfg[["investor_name"]]
+    portfolio_name = params[["portfolio_name"]],
+    investor_name = params[["investor_name"]]
   )
 
   log_debug("Loading bonds map results.")
@@ -207,8 +207,8 @@ run_pacta_reporting_process <- function(
   )
   bonds_results_map <- add_inv_and_port_names_if_needed(
     data = bonds_results_map,
-    portfolio_name = cfg[["portfolio_name"]],
-    investor_name = cfg[["investor_name"]]
+    portfolio_name = params[["portfolio_name"]],
+    investor_name = params[["investor_name"]]
   )
 
   analysis_output_manifest <- jsonlite::read_json(file.path(analysis_output_dir, "manifest.json"))
