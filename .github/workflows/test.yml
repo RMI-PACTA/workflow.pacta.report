@@ -151,7 +151,8 @@ jobs:
               --source "$SUMMARY_OUTPUT_DIR" \
               --destination "$unique_directory" \
               --recursive
-            echo "summary-url=${unique_directory}/executive_summary/" >> "$GITHUB_OUTPUT"
+            summary_files="$(ls $SUMMARY_OUTPUT_DIR/executive_summary/*.pdf)"
+            echo "summary-url=${unique_directory}/executive_summary/$summary_files" >> "$GITHUB_OUTPUT"
 
       - name: Prepare comment artifact
         id: prepare-artifact
