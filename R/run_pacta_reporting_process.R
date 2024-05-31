@@ -1,6 +1,9 @@
 run_pacta_reporting_process <- function(
   raw_params = commandArgs(trailingOnly = TRUE),
-  analysis_outputs_dir = Sys.getenv("ANALYSIS_OUTPUTS_DIR")
+  analysis_outputs_dir = Sys.getenv("ANALYSIS_OUTPUTS_DIR"),
+  benchmarks_dir = Sys.getenv("BENCHMARKS_DIR"),
+  report_output_dir = Sys.getenv("REPORT_OUTPUT_DIR"),
+  summary_output_dir = Sys.getenv("SUMMARY_OUTPUT_DIR")
 ) {
 
   # defaulting to WARN to maintain current (silent) behavior.
@@ -160,33 +163,33 @@ run_pacta_reporting_process <- function(
 
   log_debug("Loading portfolio equity peer results.")
   peers_equity_results_portfolio <- read_rds_or_return_alt_data(
-    filepath = file.path(cfg$data_dir, paste0(cfg$project_code, "_peers_equity_results_portfolio.rds")),
+    filepath = file.path(benchmarks_dir, paste0(cfg$project_code, "_peers_equity_results_portfolio.rds")),
     alt_return = pacta.portfolio.utils::empty_portfolio_results()
   )
 
   log_debug("Loading portfolio bonds peer results.")
   peers_bonds_results_portfolio <- read_rds_or_return_alt_data(
-    filepath = file.path(cfg$data_dir, paste0(cfg$project_code, "_peers_bonds_results_portfolio.rds")),
+    filepath = file.path(benchmarks_dir, paste0(cfg$project_code, "_peers_bonds_results_portfolio.rds")),
     alt_return = pacta.portfolio.utils::empty_portfolio_results()
   )
 
   log_debug("Loading index equity peer results.")
   peers_equity_results_user <- read_rds_or_return_alt_data(
-    filepath = file.path(cfg$data_dir, paste0(cfg$project_code, "_peers_equity_results_portfolio_ind.rds")),
+    filepath = file.path(benchmarks_dir, paste0(cfg$project_code, "_peers_equity_results_portfolio_ind.rds")),
     alt_return = pacta.portfolio.utils::empty_portfolio_results()
   )
 
   log_debug("Loading index bonds peer results.")
   peers_bonds_results_user <- read_rds_or_return_alt_data(
-    filepath = file.path(cfg$data_dir, paste0(cfg$project_code, "_peers_bonds_results_portfolio_ind.rds")),
+    filepath = file.path(benchmarks_dir, paste0(cfg$project_code, "_peers_bonds_results_portfolio_ind.rds")),
     alt_return = pacta.portfolio.utils::empty_portfolio_results()
   )
 
   log_debug("Loading index equity portfolio results.")
-  indices_equity_results_portfolio <- readRDS(file.path(cfg$data_dir, "Indices_equity_results_portfolio.rds"))
+  indices_equity_results_portfolio <- readRDS(file.path(benchmarks_dir, "Indices_equity_results_portfolio.rds"))
 
   log_debug("Loading index bonds portfolio results.")
-  indices_bonds_results_portfolio <- readRDS(file.path(cfg$data_dir, "Indices_bonds_results_portfolio.rds"))
+  indices_bonds_results_portfolio <- readRDS(file.path(benchmarks_dir, "Indices_bonds_results_portfolio.rds"))
 
   # create interactive report ----------------------------------------------------
 
