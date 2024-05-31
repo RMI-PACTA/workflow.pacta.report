@@ -25,6 +25,14 @@ services:
         target: /mnt/analysis_output_dir
         read_only: true
       - type: bind
+        source: ${real_estate_dir:-./real_estate_dir}
+        target: /mnt/real_estate_dir
+        read_only: true
+      - type: bind
+        source: ${survey_dir:-./survey_dir}
+        target: /mnt/survey_dir
+        read_only: true
+      - type: bind
         source: ${report_output_dir:-./report_output_dir}
         target: /mnt/report_output_dir
         read_only: false
