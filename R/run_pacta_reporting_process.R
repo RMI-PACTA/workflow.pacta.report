@@ -268,8 +268,17 @@ run_pacta_reporting_process <- function(
 
   # create executive summary -----------------------------------------------------
   prepare_executive_summary(
-    cfg = params,
     summary_output_dir = summary_output_dir,
+    survey_dir = params[["survey_dir"]],
+    real_estate_dir = params[["real_estate_dir"]],
+    score_card_dir = params[["score_card_dir"]],
+    project_code = params[["project_code"]],
+    language_select = params[["language_select"]],
+    peer_group = params[["peer_group"]],
+    investor_name = params[["investor_name"]],
+    portfolio_name = params[["portfolio_name"]],
+    start_year = params[["start_year"]],
+    currency_exchange_value = params[["currency_exchange_value"]],
     total_portfolio = total_portfolio,
     equity_results_portfolio = equity_results_portfolio,
     bonds_results_portfolio = bonds_results_portfolio,
