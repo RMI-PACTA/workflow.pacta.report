@@ -31,14 +31,44 @@ run_pacta_reporting_process <- function(
 
   log_info("Starting portfolio report process")
 
-  log_trace("Determining configuration file path")
-  cfg_path <- commandArgs(trailingOnly = TRUE)
-  if (length(cfg_path) == 0 || cfg_path == "") {
-    log_warn("No configuration file specified, using default")
-    cfg_path <- "/workflow.pacta.report/input_dir/default_config.json"
+  # Read Params
+  log_trace("Processing input parameters.")
+  if (length(raw_params) == 0L || all(raw_params == "")) {
+    log_error("No parameters specified.")
   }
-  log_debug("Loading configuration from file: \"{cfg_path}\".")
-  cfg <- jsonlite::fromJSON(cfg_path)
+
+  # log_trace("Validating raw input parameters.")
+  # raw_input_validation_results <- jsonvalidate::json_validate(
+  #   json = raw_params,
+  #   schema = system.file(
+  #     "extdata", "schema", "rawParameters.json",
+  #     package = "workflow.pacta.report"
+  #   ),
+  #   verbose = TRUE,
+  #   greedy = FALSE,
+  #   engine = "ajv"
+  # )
+  # if (raw_input_validation_results) {
+  #   log_trace("Raw input parameters are valid.")
+  # } else {
+  #   log_error(
+  #     "Invalid raw input parameters. ",
+  #     "Must include \"inherit\" key, or match full schema."
+  #   )
+  #   stop("Invalid raw input parameters.")
+  # }
+
+  params <- pacta.workflow.utils:::parse_params(
+    json = raw_params,
+    inheritence_search_paths = system.file(
+      "extdata", "parameters",
+      package = "workflow.pacta.report"
+    ) #,
+    # schema_file = system.file(
+    #   "extdata", "schema", "portfolioParameters_0-0-1.json",
+    #   package = "workflow.pacta.report"
+    # )
+  )
 
   # quit if there's no relevant PACTA assets -------------------------------------
 
