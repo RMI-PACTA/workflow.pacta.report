@@ -1,25 +1,6 @@
 {
-  "data_dir": "/mnt/pacta-data/",
-  "portfolio_path": "/mnt/input_dir/default_portfolio.csv",
-  "output_dir": "/mnt/output_dir",
-  "report_dir": "/mnt/report_dir",
   "start_year": 2023,
-  "equity_market_list": [
-    "GlobalMarket",
-    "DevelopedMarket",
-    "EmergingMarket"
-  ],
-  "scenario_sources_list": [
-    "GECO2023",
-    "ISF2023",
-    "WEO2023"
-  ],
-  "scenario_geographies_list": [
-    "Global",
-    "GlobalAggregate",
-    "NonOECD",
-    "OECD"
-  ],
+  "scenario_geography": "Global",
   "sector_list": [
     "Power",
     "Automotive",
@@ -29,20 +10,17 @@
     "Aviation",
     "Cement"
   ],
-  "has_map": false,
   "project_code": "GENERAL",
   "portfolio_name": "Default Portfolio",
   "investor_name": "Default Investor",
   "peer_group": "bank",
   "language_select": "EN",
-  "user_id": "4",
   "project_report_name": "general",
   "display_currency": "USD",
   "currency_exchange_value": 1,
   "select_scenario": "WEO2022_NZE_2050",
   "scenario_other": "GECO2022_1.5C",
   "portfolio_allocation_method": "portfolio_weight",
-  "scenario_geography": "Global",
   "tech_roadmap_sectors": [
     "Power",
     "Automotive",
