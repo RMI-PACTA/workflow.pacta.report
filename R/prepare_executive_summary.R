@@ -1,5 +1,6 @@
 prepare_executive_summary <- function(
   cfg,
+  summary_output_dir,
   total_portfolio,
   equity_results_portfolio,
   bonds_results_portfolio,
@@ -17,7 +18,7 @@ prepare_executive_summary <- function(
   survey_dir <- fs::path_abs(file.path(cfg$user_results_path, cfg$project_code, "survey"))
   real_estate_dir <- fs::path_abs(file.path(cfg$user_results_path, cfg$project_code, "real_estate"))
   score_card_dir <- fs::path_abs(file.path(cfg$user_results_path, cfg$project_code, "score_card"))
-  es_dir <- file.path(cfg$output_dir, "executive_summary")
+  es_dir <- file.path(summary_output_dir, "executive_summary")
   if (!dir.exists(es_dir)) {
     dir.create(es_dir, showWarnings = FALSE, recursive = TRUE)
   }
@@ -28,8 +29,8 @@ prepare_executive_summary <- function(
     "extdata", exec_summary_template_name,
     package = "pacta.executive.summary"
   )
-  invisible(file.copy(exec_summary_builtin_template_path, cfg$output_dir, recursive = TRUE, copy.mode = FALSE))
-  exec_summary_template_path <- file.path(cfg$output_dir, exec_summary_template_name)
+  invisible(file.copy(exec_summary_builtin_template_path, summary_output_dir, recursive = TRUE, copy.mode = FALSE))
+  exec_summary_template_path <- file.path(summary_output_dir, exec_summary_template_name)
 
   if (
     dir.exists(exec_summary_template_path) && (
@@ -94,7 +95,7 @@ prepare_executive_summary <- function(
       total_portfolio = total_portfolio,
       scenario_selected = "1.5C-Unif",
       currency_exchange_value = cfg$currency_exchange_value,
-      log_dir = cfg$output_dir
+      log_dir = summary_output_dir
     )
   } else {
     # this is required for the online tool to know that the process has been completed.
