@@ -10,16 +10,12 @@
     "Aviation",
     "Cement"
   ],
-  "project_code": "GENERAL",
   "portfolio_name": "Default Portfolio",
   "investor_name": "Default Investor",
   "peer_group": "bank",
   "language_select": "EN",
-  "project_report_name": "general",
   "display_currency": "USD",
   "currency_exchange_value": 1,
-  "select_scenario": "WEO2022_NZE_2050",
-  "scenario_other": "GECO2022_1.5C",
   "portfolio_allocation_method": "portfolio_weight",
   "tech_roadmap_sectors": [
     "Power",

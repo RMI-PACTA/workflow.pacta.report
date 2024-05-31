@@ -5,8 +5,7 @@ services:
     # stdin_open: true
     # tty: true
     # entrypoint: ["R", "--args"]
-    # command: '{\"portfolio_files\": \"default_portfolio.csv\", \"inherit\": \"GENERAL_2023Q4\"}'
-    command: "/workflow.pacta.report/inst/extdata/parameters/default.json"
+    command: '{\"portfolio_files\": \"default_portfolio.csv\", \"inherit\": \"GENERAL_2023Q4\"}'
     environment:
       LOG_LEVEL: TRACE
       ANALYSIS_OUTPUT_DIR: "/mnt/analysis_output_dir"
