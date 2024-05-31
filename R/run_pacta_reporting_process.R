@@ -246,7 +246,7 @@ run_pacta_reporting_process <- function(
   # create interactive report ----------------------------------------------------
 
   prepare_interactive_report(
-    cfg = cfg,
+    cfg = params,
     report_output_dir = report_output_dir,
     audit_file = audit_file,
     emissions = emissions,
@@ -268,7 +268,7 @@ run_pacta_reporting_process <- function(
 
   # create executive summary -----------------------------------------------------
   prepare_executive_summary(
-    cfg = cfg,
+    cfg = params,
     summary_output_dir = summary_output_dir,
     total_portfolio = total_portfolio,
     equity_results_portfolio = equity_results_portfolio,
