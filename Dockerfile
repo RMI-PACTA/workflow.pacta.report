@@ -14,8 +14,12 @@ USER root
 RUN apt-get update \
     && DEBIAN_FRONTEND="noninteractive" \
     apt-get install -y --no-install-recommends \
+      git=1:2.34.* \
+      libcurl4-openssl-dev=7.81.* \
+      libgit2-dev=1.1.* \
       libicu-dev=70.* \
       libpng-dev=1.6.* \
+      libssl-dev=3.0.* \
       libxt6=1:1.2.* \
       pandoc=2.9.* \
     && chmod -R a+rwX /root \
