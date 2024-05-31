@@ -162,7 +162,7 @@ jobs:
           full_image_name: ${{ inputs.full-image-name }}
           git_sha: ${{ github.event.pull_request.head.sha }}
           report_url: ${{ steps.upload.outputs.report-url }}
-          summary_url: ${{ env.summary-url }}
+          summary_url: ${{ steps.upload.outputs.summary-url }}
         run: |
           mkdir -p /tmp/comment-json
           json_filename="$( \
