@@ -1,6 +1,23 @@
 prepare_interactive_report <- function(
-  cfg,
   report_output_dir,
+  project_report_name,
+  survey_dir,
+  real_estate_dir,
+  language_select,
+  peer_group,
+  investor_name,
+  portfolio_name,
+  start_year,
+  currency_exchange_value,
+  select_scenario,
+  scenario_other,
+  portfolio_allocation_method,
+  scenario_geography,
+  sector_list,
+  green_techs,
+  tech_roadmap_sectors,
+  pacta_sectors_not_analysed,
+  display_currency,
   audit_file,
   emissions,
   portfolio_overview,
@@ -46,39 +63,37 @@ prepare_interactive_report <- function(
   # combine config files to send to create_interactive_report()
   log_trace("Defining configs and manifest.")
 
-  configs <-
-    list(
-      portfolio_config = cfg,
-      analysis_output_manifest = analysis_output_manifest
-    )
+  configs <- list(
+    analysis_output_manifest = analysis_output_manifest
+  )
 
   # workaround a bug in {config} v0.3.2 that only adds "config" class to objects it creates
   class(configs$portfolio_config) <- c(class(configs$portfolio_config), "list")
 
   log_trace("Defining interactive report template paths.")
   template_path <- system.file("templates", package = "pacta.portfolio.report")
-  template_dir_name <- paste(tolower(cfg$project_report_name), tolower(cfg$language_select), "template", sep = "_")
+  template_dir_name <- paste(tolower(project_report_name), tolower(language_select), "template", sep = "_")
   template_dir <- file.path(template_path, template_dir_name)
 
   log_info("Creating interactive report.")
   pacta.portfolio.report::create_interactive_report(
     template_dir = template_dir,
     output_dir = report_output_dir,
-    survey_dir = cfg$survey_dir,
-    real_estate_dir = cfg$real_estate_dir,
-    language_select = cfg$language_select,
-    investor_name = cfg$investor_name,
-    portfolio_name = cfg$portfolio_name,
-    peer_group = cfg$peer_group,
-    start_year = cfg$start_year,
-    select_scenario = cfg$select_scenario,
-    select_scenario_other = cfg$scenario_other,
-    portfolio_allocation_method = cfg$portfolio_allocation_method,
-    scenario_geography = cfg$scenario_geography,
-    pacta_sectors = cfg$sector_list,
-    green_techs = cfg$green_techs,
-    tech_roadmap_sectors = cfg$tech_roadmap_sectors,
-    pacta_sectors_not_analysed = cfg$pacta_sectors_not_analysed,
+    survey_dir = survey_dir,
+    real_estate_dir = real_estate_dir,
+    language_select = language_select,
+    investor_name = investor_name,
+    portfolio_name = portfolio_name,
+    peer_group = peer_group,
+    start_year = start_year,
+    select_scenario = select_scenario,
+    select_scenario_other = scenario_other,
+    portfolio_allocation_method = portfolio_allocation_method,
+    scenario_geography = scenario_geography,
+    pacta_sectors = sector_list,
+    green_techs = green_techs,
+    tech_roadmap_sectors = tech_roadmap_sectors,
+    pacta_sectors_not_analysed = pacta_sectors_not_analysed,
     audit_file = audit_file,
     emissions = emissions,
     portfolio_overview = portfolio_overview,
@@ -96,8 +111,8 @@ prepare_interactive_report <- function(
     peers_bonds_results_user = peers_bonds_results_user,
     dataframe_translations = dataframe_translations,
     js_translations = js_translations,
-    display_currency = cfg$display_currency,
-    currency_exchange_value = cfg$currency_exchange_value,
+    display_currency = display_currency,
+    currency_exchange_value = currency_exchange_value,
     header_dictionary = header_dictionary,
     sector_order = sector_order,
     configs = configs
