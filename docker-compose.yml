@@ -10,7 +10,7 @@ services:
     # command: "/workflow.pacta.report/input_dir/default_config.json"
     environment:
       LOG_LEVEL: TRACE
-      ANALYSIS_OUTPUTS_DIR: "/mnt/analysis_output_dir"
+      ANALYSIS_OUTPUT_DIR: "/mnt/analysis_output_dir"
       BENCHMARKS_DIR: "/mnt/benchmarks_dir"
       REPORT_OUTPUT_DIR: "/mnt/report_output_dir"
       SUMMARY_OUTPUT_DIR: "/mnt/summary_output_dir"

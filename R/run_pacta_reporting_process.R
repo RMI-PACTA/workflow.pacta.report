@@ -1,6 +1,6 @@
 run_pacta_reporting_process <- function(
   raw_params = commandArgs(trailingOnly = TRUE),
-  analysis_output_dir = Sys.getenv("ANALYSIS_OUTPUTS_DIR"),
+  analysis_output_dir = Sys.getenv("ANALYSIS_OUTPUT_DIR"),
   benchmarks_dir = Sys.getenv("BENCHMARKS_DIR"),
   report_output_dir = Sys.getenv("REPORT_OUTPUT_DIR"),
   summary_output_dir = Sys.getenv("SUMMARY_OUTPUT_DIR")
