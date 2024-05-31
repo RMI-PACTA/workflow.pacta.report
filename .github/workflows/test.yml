@@ -135,16 +135,23 @@ jobs:
           GITHUB_REF_NAME: ${{ github.ref_name}}
           GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
           GITHUB_RUN_NUMBER: ${{ github.run_number }}
-          REPORT_DIR: report
+          REPORT_OUTPUT_DIR: report_output_dir
+          SUMMARY_OUTPUT_DIR: summary_output_dir
           RESULTS_URL: ${{ inputs.results-url }}
         with:
           inlineScript: |
             unique_directory="$RESULTS_URL/$GITHUB_REF_NAME/$GITHUB_RUN_NUMBER/$GITHUB_RUN_ATTEMPT/$CONFIG_NAME"
             az storage copy \
-              --source "$REPORT_DIR" \
+              --source "$REPORT_OUTPUT_DIR" \
               --destination "$unique_directory" \
               --recursive
-            echo "report-url=${unique_directory}/report/report/index.html" >> "$GITHUB_OUTPUT"
+            echo "report-url=${unique_directory}/report/index.html" >> "$GITHUB_OUTPUT"
+
+            az storage copy \
+              --source "$SUMMARY_OUTPUT_DIR" \
+              --destination "$unique_directory" \
+              --recursive
+            echo "summary-url=${unique_directory}/executive_summary/" >> "$GITHUB_OUTPUT"
 
       - name: Prepare comment artifact
         id: prepare-artifact
