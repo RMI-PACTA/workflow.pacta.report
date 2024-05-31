@@ -86,11 +86,14 @@ run_pacta_reporting_process <- function(
 
   # fix parameters ---------------------------------------------------------------
 
-  if (cfg$project_code == "GENERAL") {
+  if (
+    params[["project_code"]] == "GENERAL" &&
+      params[["language_select"]] != "EN"
+  ) {
     log_warn("Overriding language selection to \"EN\" for \"GENERAL\".")
-    cfg$language_select <- "EN"
+    params[["language_select"]] <- "EN"
   } else {
-    log_trace("Using language selection: \"{cfg$language_select}\".")
+    log_trace("Using language selection: \"{params[["language_select"]]}\".")
   }
 
 
@@ -212,25 +215,25 @@ run_pacta_reporting_process <- function(
 
   log_debug("Loading portfolio equity peer results.")
   peers_equity_results_portfolio <- read_rds_or_return_alt_data(
-    filepath = file.path(benchmarks_dir, paste0(cfg$project_code, "_peers_equity_results_portfolio.rds")),
+    filepath = file.path(benchmarks_dir, paste0(params[["project_code"]], "_peers_equity_results_portfolio.rds")),
     alt_return = pacta.portfolio.utils::empty_portfolio_results()
   )
 
   log_debug("Loading portfolio bonds peer results.")
   peers_bonds_results_portfolio <- read_rds_or_return_alt_data(
-    filepath = file.path(benchmarks_dir, paste0(cfg$project_code, "_peers_bonds_results_portfolio.rds")),
+    filepath = file.path(benchmarks_dir, paste0(params[["project_code"]], "_peers_bonds_results_portfolio.rds")),
     alt_return = pacta.portfolio.utils::empty_portfolio_results()
   )
 
   log_debug("Loading index equity peer results.")
   peers_equity_results_user <- read_rds_or_return_alt_data(
-    filepath = file.path(benchmarks_dir, paste0(cfg$project_code, "_peers_equity_results_portfolio_ind.rds")),
+    filepath = file.path(benchmarks_dir, paste0(params[["project_code"]], "_peers_equity_results_portfolio_ind.rds")),
     alt_return = pacta.portfolio.utils::empty_portfolio_results()
   )
 
   log_debug("Loading index bonds peer results.")
   peers_bonds_results_user <- read_rds_or_return_alt_data(
-    filepath = file.path(benchmarks_dir, paste0(cfg$project_code, "_peers_bonds_results_portfolio_ind.rds")),
+    filepath = file.path(benchmarks_dir, paste0(params[["project_code"]], "_peers_bonds_results_portfolio_ind.rds")),
     alt_return = pacta.portfolio.utils::empty_portfolio_results()
   )
 
