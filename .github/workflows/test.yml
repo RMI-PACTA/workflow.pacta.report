@@ -117,9 +117,8 @@ jobs:
           --mount type=bind,readonly,source=${WORKSPACE}/${ANALYSIS_OUTPUT_DIR},target=/mnt/analysis_output_dir \
           --mount type=bind,source=${WORKSPACE}/${REPORT_OUTPUT_DIR},target=/mnt/report_output_dir \
           --mount type=bind,source=${WORKSPACE}/${SUMMARY_OUTPUT_DIR},target=/mnt/summary_output_dir \
-          $FULL_IMAGE_NAME
-          # $FULL_IMAGE_NAME \
-          # $PARAMETERS
+          $FULL_IMAGE_NAME \
+          $PARAMETERS
 
       - name: List outputs
         run: |
