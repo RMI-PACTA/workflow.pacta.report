@@ -67,9 +67,6 @@ prepare_interactive_report <- function(
     analysis_output_manifest = analysis_output_manifest
   )
 
-  # workaround a bug in {config} v0.3.2 that only adds "config" class to objects it creates
-  class(configs$portfolio_config) <- c(class(configs$portfolio_config), "list")
-
   log_trace("Defining interactive report template paths.")
   template_path <- system.file("templates", package = "pacta.portfolio.report")
   template_dir_name <- paste(tolower(project_report_name), tolower(language_select), "template", sep = "_")
