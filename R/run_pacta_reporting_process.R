@@ -93,7 +93,7 @@ run_pacta_reporting_process <- function(
     log_warn("Overriding language selection to \"EN\" for \"GENERAL\".")
     params[["language_select"]] <- "EN"
   } else {
-    log_trace("Using language selection: \"{params[["language_select"]]}\".")
+    log_trace("Using language selection: \"{params[['language_select']]}\".")
   }
 
 
