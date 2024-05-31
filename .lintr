@@ -1,4 +1,6 @@
 linters: linters_with_defaults(
+    commented_code_linter = NULL,
+    cyclocomp_linter = NULL,
     object_length_linter(35),
     line_length_linter(120)
   )
