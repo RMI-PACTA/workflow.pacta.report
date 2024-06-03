@@ -31,6 +31,6 @@ Imports:
     readr
 Remotes:
     RMI-PACTA/pacta.executive.summary,
-    RMI-PACTA/pacta.portfolio.report@issues-found-in-workflow.pacta.report,
+    RMI-PACTA/pacta.portfolio.report,
     RMI-PACTA/pacta.portfolio.utils,
     RMI-PACTA/pacta.workflow.utils
