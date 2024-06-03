@@ -148,13 +148,13 @@ jobs:
           inlineScript: |
             unique_directory="$RESULTS_URL/$GITHUB_REF_NAME/$GITHUB_RUN_NUMBER/$GITHUB_RUN_ATTEMPT/$CONFIG_NAME"
             az storage copy \
-              --source "$REPORT_OUTPUT_DIR" \
+              --source "$REPORT_OUTPUT_DIR"/* \
               --destination "$unique_directory" \
               --recursive
             echo "report-url=${unique_directory}/report/index.html" >> "$GITHUB_OUTPUT"
 
             az storage copy \
-              --source "$SUMMARY_OUTPUT_DIR" \
+              --source "$SUMMARY_OUTPUT_DIR"/* \
               --destination "$unique_directory" \
               --recursive
             summary_files="$(ls $SUMMARY_OUTPUT_DIR/executive_summary/*.pdf)"
