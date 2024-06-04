@@ -84,7 +84,7 @@ run_pacta_reporting_process <- function(
     pacta.portfolio.utils::quit_if_no_pacta_relevant_data(total_portfolio)
   } else {
     log_warn("file \"{total_portfolio_path}\" does not exist.")
-    warning("This is weird... the `total_portfolio.rds` file does not exist in the `30_Processed_inputs` directory.")
+    warning("Cannot find total_portfolio.rds file. Exiting.")
   }
 
 
