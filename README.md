@@ -11,4 +11,4 @@ packages that it depends on.
 Running PACTA also requires pacta-data, which needs to be mounted into the
 container at run-time.
 
-See workflow.pacta for examples of a similar docker container and invokation
+See workflow.pacta for examples of a similar docker container and invocation
