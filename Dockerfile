@@ -6,7 +6,7 @@ LABEL org.opencontainers.image.description="Docker image to create PACTA reports
 LABEL org.opencontainers.image.licenses=MIT
 LABEL org.opencontainers.image.title="workflow.pacta.report"
 LABEL org.opencontainers.image.vendor="RMI"
-LABEL org.opencontainers.image.base.name="ghcr.io/rmi-pacta/workflow.pacta:main"
+LABEL org.opencontainers.image.base.name="docker.io/rocker/r-ver:4.3.1"
 LABEL org.opencontainers.image.authors="Alex Axthelm"
 
 # install system dependencies
