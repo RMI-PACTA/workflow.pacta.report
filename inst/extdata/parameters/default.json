@@ -1,0 +1,39 @@
+{
+  "scenario_geography": "Global",
+  "sector_list": [
+    "Power",
+    "Automotive",
+    "Oil&Gas",
+    "Coal",
+    "Steel",
+    "Aviation",
+    "Cement"
+  ],
+  "portfolio_name": "Default Portfolio",
+  "investor_name": "Default Investor",
+  "peer_group": "bank",
+  "language_select": "EN",
+  "display_currency": "USD",
+  "currency_exchange_value": 1,
+  "portfolio_allocation_method": "portfolio_weight",
+  "tech_roadmap_sectors": [
+    "Power",
+    "Automotive",
+    "Oil&Gas",
+    "Coal"
+  ],
+  "pacta_sectors_not_analysed": [
+    "Steel",
+    "Aviation",
+    "Cement"
+  ],
+  "green_techs": [
+    "RenewablesCap",
+    "HydroCap",
+    "NuclearCap",
+    "Hybrid",
+    "Electric",
+    "FuelCell",
+    "Electric Arc Furnace"
+  ]
+}

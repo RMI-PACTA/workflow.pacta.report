@@ -1,6 +1,6 @@
 Package: workflow.pacta.report
 Title: Reporting functionality for PACTA
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: 
     c(person(given = "Alex",
              family = "Axthelm",
@@ -15,21 +15,22 @@ Authors@R:
       person(given = "RMI",
              role = c("cph", "fnd"),
              email = "PACTA4investors@rmi.org"))
-Description: Create Interactive Reports and Executive Summaries for PACTA
+Description: Create Interactive Reports and Executive Summaries for PACTA.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
 Imports:
     dplyr,
-    fs,
     jsonlite,
     logger,
     pacta.executive.summary,
     pacta.portfolio.report,
     pacta.portfolio.utils,
+    pacta.workflow.utils,
     readr
 Remotes:
     RMI-PACTA/pacta.executive.summary,
     RMI-PACTA/pacta.portfolio.report,
-    RMI-PACTA/pacta.portfolio.utils
+    RMI-PACTA/pacta.portfolio.utils,
+    RMI-PACTA/pacta.workflow.utils

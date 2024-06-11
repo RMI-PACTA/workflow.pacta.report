@@ -6,7 +6,7 @@ LABEL org.opencontainers.image.description="Docker image to create PACTA reports
 LABEL org.opencontainers.image.licenses=MIT
 LABEL org.opencontainers.image.title="workflow.pacta.report"
 LABEL org.opencontainers.image.vendor="RMI"
-LABEL org.opencontainers.image.base.name="ghcr.io/rmi-pacta/workflow.pacta:main"
+LABEL org.opencontainers.image.base.name="docker.io/rocker/r-ver:4.3.1"
 LABEL org.opencontainers.image.authors="Alex Axthelm"
 
 # install system dependencies
@@ -14,8 +14,12 @@ USER root
 RUN apt-get update \
     && DEBIAN_FRONTEND="noninteractive" \
     apt-get install -y --no-install-recommends \
+      git=1:2.34.* \
+      libcurl4-openssl-dev=7.81.* \
+      libgit2-dev=1.1.* \
       libicu-dev=70.* \
       libpng-dev=1.6.* \
+      libssl-dev=3.0.* \
       libxt6=1:1.2.* \
       pandoc=2.9.* \
     && chmod -R a+rwX /root \
@@ -24,7 +28,7 @@ RUN apt-get update \
 # set frozen CRAN repo and RProfile.site
 # This block makes use of the builtin ARG $TARGETPLATFORM (See:
 # https://www.docker.com/blog/faster-multi-platform-builds-dockerfile-cross-compilation-guide/
-# ) to pick the correct CRAN-like repo, which will let us target binaries fo
+# ) to pick the correct CRAN-like repo, which will let us target binaries for
 # supported platforms
 ARG TARGETPLATFORM
 RUN PACKAGE_PIN_DATE="2024-04-05" && \
@@ -70,5 +74,4 @@ COPY . /workflow.pacta.report/
 RUN Rscript -e "pak::local_install(root = '/workflow.pacta.report')"
 
 # set default run behavior
-ENTRYPOINT ["/run-pacta.sh"]
-CMD ["input_dir/default_config.json"]
+ENTRYPOINT ["Rscript", "--vanilla", "/workflow.pacta.report/inst/extdata/scripts/run_pacta_report.R"]

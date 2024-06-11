@@ -1,0 +1,7 @@
+{
+  "select_scenario": "WEO2022_NZE_2050",
+  "scenario_other": "GECO2022_1.5C",
+  "start_year": 2023,
+  "inherit": "GENERAL"
+}
+
