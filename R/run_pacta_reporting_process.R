@@ -76,6 +76,18 @@ run_pacta_reporting_process <- function(
 
   # quit if there's no relevant PACTA assets -------------------------------------
 
+  log_debug("Checking for PACTA analysis manifest.")
+  analysis_manifest_path <- file.path(analysis_output_dir, "manifest.json")
+  if (file.exists(analysis_manifest_path)) {
+    log_trace("Reading analysis manifest.")
+    analysis_manifest <- jsonlite::read_json(analysis_manifest_path)
+    analysis_params <- analysis_manifest[["params"]][["analysis"]]
+  } else {
+    log_warn("file \"{analysis_manifest_path}\" does not exist.")
+    stop("Cannot find analysis manifest file.")
+  }
+
+
   log_debug("Checking for PACTA relevant data in portfolio results.")
   total_portfolio_path <- file.path(analysis_output_dir, "total_portfolio.rds")
   if (file.exists(total_portfolio_path)) {
@@ -261,7 +273,7 @@ run_pacta_reporting_process <- function(
     peer_group = params[["user"]][["peer_group"]],
     investor_name = params[["user"]][["investor_name"]],
     portfolio_name = params[["portfolio"]][["name"]],
-    start_year = params[["reporting"]][["start_year"]],
+    start_year = analysis_params[["start_year"]],
     currency_exchange_value = params[["user"]][["currency_exchange_value"]],
     select_scenario = params[["reporting"]][["select_scenario"]],
     scenario_other = params[["reporting"]][["scenario_other"]],
@@ -301,7 +313,7 @@ run_pacta_reporting_process <- function(
     peer_group = params[["user"]][["peer_group"]],
     investor_name = params[["user"]][["investor_name"]],
     portfolio_name = params[["portfolio"]][["name"]],
-    start_year = params[["reporting"]][["start_year"]],
+    start_year = analysis_params[["start_year"]],
     currency_exchange_value = params[["user"]][["currency_exchange_value"]],
     total_portfolio = total_portfolio,
     equity_results_portfolio = equity_results_portfolio,
