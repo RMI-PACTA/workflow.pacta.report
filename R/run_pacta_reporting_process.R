@@ -91,13 +91,16 @@ run_pacta_reporting_process <- function(
   # fix parameters ---------------------------------------------------------------
 
   if (
-    params[["project_code"]] == "GENERAL" &&
-      params[["language_select"]] != "EN"
+    params[["reporting"]][["project_code"]] == "GENERAL" &&
+      params[["user"]][["language_select"]] != "EN"
   ) {
     log_warn("Overriding language selection to \"EN\" for \"GENERAL\".")
-    params[["language_select"]] <- "EN"
+    params[["user"]][["language_select"]] <- "EN"
   } else {
-    log_trace("Using language selection: \"{params[['language_select']]}\".")
+    log_trace(
+      "Using language selection: ",
+      "\"{params[['user']][['language_select']]}\"."
+    )
   }
 
 
@@ -112,8 +115,8 @@ run_pacta_reporting_process <- function(
   )
   audit_file <- add_inv_and_port_names_if_needed(
     data = audit_file,
-    portfolio_name = params[["portfolio_name"]],
-    investor_name = params[["investor_name"]]
+    portfolio_name = params[["portfolio"]][["portfolio_name"]],
+    investor_name = params[["user"]][["investor_name"]]
   )
 
   log_debug("Loading portfolio overview.")
@@ -123,8 +126,8 @@ run_pacta_reporting_process <- function(
   )
   portfolio_overview <- add_inv_and_port_names_if_needed(
     data = portfolio_overview,
-    portfolio_name = params[["portfolio_name"]],
-    investor_name = params[["investor_name"]]
+    portfolio_name = params[["portfolio"]][["portfolio_name"]],
+    investor_name = params[["user"]][["investor_name"]]
   )
 
   log_debug("Loading emissions.")
@@ -134,8 +137,8 @@ run_pacta_reporting_process <- function(
   )
   emissions <- add_inv_and_port_names_if_needed(
     data = emissions,
-    portfolio_name = params[["portfolio_name"]],
-    investor_name = params[["investor_name"]]
+    portfolio_name = params[["portfolio"]][["portfolio_name"]],
+    investor_name = params[["user"]][["investor_name"]]
   )
 
   log_debug("Loading total portfolio results.")
@@ -145,8 +148,8 @@ run_pacta_reporting_process <- function(
   )
   total_portfolio <- add_inv_and_port_names_if_needed(
     data = total_portfolio,
-    portfolio_name = params[["portfolio_name"]],
-    investor_name = params[["investor_name"]]
+    portfolio_name = params[["portfolio"]][["portfolio_name"]],
+    investor_name = params[["user"]][["investor_name"]]
   )
 
   log_debug("Loading portfolio equity results.")
@@ -156,8 +159,8 @@ run_pacta_reporting_process <- function(
   )
   equity_results_portfolio <- add_inv_and_port_names_if_needed(
     data = equity_results_portfolio,
-    portfolio_name = params[["portfolio_name"]],
-    investor_name = params[["investor_name"]]
+    portfolio_name = params[["portfolio"]][["portfolio_name"]],
+    investor_name = params[["user"]][["investor_name"]]
   )
 
   log_debug("Loading portfolio bonds results.")
@@ -167,8 +170,8 @@ run_pacta_reporting_process <- function(
   )
   bonds_results_portfolio <- add_inv_and_port_names_if_needed(
     data = bonds_results_portfolio,
-    portfolio_name = params[["portfolio_name"]],
-    investor_name = params[["investor_name"]]
+    portfolio_name = params[["portfolio"]][["portfolio_name"]],
+    investor_name = params[["user"]][["investor_name"]]
   )
 
   log_debug("Loading company equity results.")
@@ -178,8 +181,8 @@ run_pacta_reporting_process <- function(
   )
   equity_results_company <- add_inv_and_port_names_if_needed(
     data = equity_results_company,
-    portfolio_name = params[["portfolio_name"]],
-    investor_name = params[["investor_name"]]
+    portfolio_name = params[["portfolio"]][["portfolio_name"]],
+    investor_name = params[["user"]][["investor_name"]]
   )
 
   log_debug("Loading company bonds results.")
@@ -189,8 +192,8 @@ run_pacta_reporting_process <- function(
   )
   bonds_results_company <- add_inv_and_port_names_if_needed(
     data = bonds_results_company,
-    portfolio_name = params[["portfolio_name"]],
-    investor_name = params[["investor_name"]]
+    portfolio_name = params[["portfolio"]][["portfolio_name"]],
+    investor_name = params[["user"]][["investor_name"]]
   )
 
   log_debug("Loading equity map results.")
@@ -200,8 +203,8 @@ run_pacta_reporting_process <- function(
   )
   equity_results_map <- add_inv_and_port_names_if_needed(
     data = equity_results_map,
-    portfolio_name = params[["portfolio_name"]],
-    investor_name = params[["investor_name"]]
+    portfolio_name = params[["portfolio"]][["portfolio_name"]],
+    investor_name = params[["user"]][["investor_name"]]
   )
 
   log_debug("Loading bonds map results.")
@@ -211,33 +214,33 @@ run_pacta_reporting_process <- function(
   )
   bonds_results_map <- add_inv_and_port_names_if_needed(
     data = bonds_results_map,
-    portfolio_name = params[["portfolio_name"]],
-    investor_name = params[["investor_name"]]
+    portfolio_name = params[["portfolio"]][["portfolio_name"]],
+    investor_name = params[["user"]][["investor_name"]]
   )
 
   analysis_output_manifest <- jsonlite::read_json(file.path(analysis_output_dir, "manifest.json"))
 
   log_debug("Loading portfolio equity peer results.")
   peers_equity_results_portfolio <- read_rds_or_return_alt_data(
-    filepath = file.path(benchmarks_dir, paste0(params[["project_code"]], "_peers_equity_results_portfolio.rds")),
+    filepath = file.path(benchmarks_dir, paste0(params[["reporting"]][["project_code"]], "_peers_equity_results_portfolio.rds")),
     alt_return = pacta.portfolio.utils::empty_portfolio_results()
   )
 
   log_debug("Loading portfolio bonds peer results.")
   peers_bonds_results_portfolio <- read_rds_or_return_alt_data(
-    filepath = file.path(benchmarks_dir, paste0(params[["project_code"]], "_peers_bonds_results_portfolio.rds")),
+    filepath = file.path(benchmarks_dir, paste0(params[["reporting"]][["project_code"]], "_peers_bonds_results_portfolio.rds")),
     alt_return = pacta.portfolio.utils::empty_portfolio_results()
   )
 
   log_debug("Loading index equity peer results.")
   peers_equity_results_user <- read_rds_or_return_alt_data(
-    filepath = file.path(benchmarks_dir, paste0(params[["project_code"]], "_peers_equity_results_portfolio_ind.rds")),
+    filepath = file.path(benchmarks_dir, paste0(params[["reporting"]][["project_code"]], "_peers_equity_results_portfolio_ind.rds")),
     alt_return = pacta.portfolio.utils::empty_portfolio_results()
   )
 
   log_debug("Loading index bonds peer results.")
   peers_bonds_results_user <- read_rds_or_return_alt_data(
-    filepath = file.path(benchmarks_dir, paste0(params[["project_code"]], "_peers_bonds_results_portfolio_ind.rds")),
+    filepath = file.path(benchmarks_dir, paste0(params[["reporting"]][["project_code"]], "_peers_bonds_results_portfolio_ind.rds")),
     alt_return = pacta.portfolio.utils::empty_portfolio_results()
   )
 
@@ -251,24 +254,24 @@ run_pacta_reporting_process <- function(
 
   prepare_interactive_report(
     report_output_dir = report_output_dir,
-    project_report_name = params[["project_report_name"]],
+    project_report_name = params[["reporting"]][["project_report_name"]],
     survey_dir = survey_dir,
     real_estate_dir = real_estate_dir,
-    language_select = params[["language_select"]],
-    peer_group = params[["peer_group"]],
-    investor_name = params[["investor_name"]],
-    portfolio_name = params[["portfolio_name"]],
-    start_year = params[["start_year"]],
-    currency_exchange_value = params[["currency_exchange_value"]],
-    select_scenario = params[["select_scenario"]],
-    scenario_other = params[["scenario_other"]],
-    portfolio_allocation_method = params[["portfolio_allocation_method"]],
-    scenario_geography = params[["scenario_geography"]],
-    sector_list = params[["sector_list"]],
-    green_techs = params[["green_techs"]],
-    tech_roadmap_sectors = params[["tech_roadmap_sectors"]],
-    pacta_sectors_not_analysed = params[["pacta_sectors_not_analysed"]],
-    display_currency = params[["display_currency"]],
+    language_select = params[["user"]][["language_select"]],
+    peer_group = params[["user"]][["peer_group"]],
+    investor_name = params[["user"]][["investor_name"]],
+    portfolio_name = params[["portfolio"]][["portfolio_name"]],
+    start_year = params[["reporting"]][["start_year"]],
+    currency_exchange_value = params[["user"]][["currency_exchange_value"]],
+    select_scenario = params[["reporting"]][["select_scenario"]],
+    scenario_other = params[["reporting"]][["scenario_other"]],
+    portfolio_allocation_method = params[["reporting"]][["portfolio_allocation_method"]],
+    scenario_geography = params[["reporting"]][["scenario_geography"]],
+    sector_list = params[["reporting"]][["sector_list"]],
+    green_techs = params[["reporting"]][["green_techs"]],
+    tech_roadmap_sectors = params[["reporting"]][["tech_roadmap_sectors"]],
+    pacta_sectors_not_analysed = params[["reporting"]][["pacta_sectors_not_analysed"]],
+    display_currency = params[["user"]][["display_currency"]],
     audit_file = audit_file,
     emissions = emissions,
     portfolio_overview = portfolio_overview,
@@ -293,13 +296,13 @@ run_pacta_reporting_process <- function(
     survey_dir = survey_dir,
     real_estate_dir = real_estate_dir,
     score_card_dir = score_card_dir,
-    project_code = params[["project_code"]],
-    language_select = params[["language_select"]],
-    peer_group = params[["peer_group"]],
-    investor_name = params[["investor_name"]],
-    portfolio_name = params[["portfolio_name"]],
-    start_year = params[["start_year"]],
-    currency_exchange_value = params[["currency_exchange_value"]],
+    project_code = params[["reporting"]][["project_code"]],
+    language_select = params[["user"]][["language_select"]],
+    peer_group = params[["user"]][["peer_group"]],
+    investor_name = params[["user"]][["investor_name"]],
+    portfolio_name = params[["portfolio"]][["portfolio_name"]],
+    start_year = params[["reporting"]][["start_year"]],
+    currency_exchange_value = params[["user"]][["currency_exchange_value"]],
     total_portfolio = total_portfolio,
     equity_results_portfolio = equity_results_portfolio,
     bonds_results_portfolio = bonds_results_portfolio,
