@@ -125,7 +125,7 @@ jobs:
             --mount type=bind,source=${WORKSPACE}/${REPORT_OUTPUT_DIR},target=/mnt/report_output_dir \
             --mount type=bind,source=${WORKSPACE}/${SUMMARY_OUTPUT_DIR},target=/mnt/summary_output_dir \
             $FULL_IMAGE_NAME \
-            $PARAMETERS
+            "$PARAMETERS"
 
       - name: List outputs
         run: |
