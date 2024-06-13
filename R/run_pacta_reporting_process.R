@@ -273,7 +273,7 @@ run_pacta_reporting_process <- function(
     peer_group = params[["user"]][["peer_group"]],
     investor_name = params[["user"]][["investor_name"]],
     portfolio_name = params[["portfolio"]][["name"]],
-    start_year = analysis_params[["start_year"]],
+    start_year = analysis_params[["startYear"]],
     currency_exchange_value = params[["user"]][["currency_exchange_value"]],
     select_scenario = params[["reporting"]][["select_scenario"]],
     scenario_other = params[["reporting"]][["scenario_other"]],
