@@ -127,7 +127,7 @@ run_pacta_reporting_process <- function(
   )
   audit_file <- add_inv_and_port_names_if_needed(
     data = audit_file,
-    portfolio_name = params[["portfolio"]][["portfolio_name"]],
+    portfolio_name = params[["portfolio"]][["name"]],
     investor_name = params[["user"]][["investor_name"]]
   )
 
@@ -138,7 +138,7 @@ run_pacta_reporting_process <- function(
   )
   portfolio_overview <- add_inv_and_port_names_if_needed(
     data = portfolio_overview,
-    portfolio_name = params[["portfolio"]][["portfolio_name"]],
+    portfolio_name = params[["portfolio"]][["name"]],
     investor_name = params[["user"]][["investor_name"]]
   )
 
@@ -149,7 +149,7 @@ run_pacta_reporting_process <- function(
   )
   emissions <- add_inv_and_port_names_if_needed(
     data = emissions,
-    portfolio_name = params[["portfolio"]][["portfolio_name"]],
+    portfolio_name = params[["portfolio"]][["name"]],
     investor_name = params[["user"]][["investor_name"]]
   )
 
@@ -160,7 +160,7 @@ run_pacta_reporting_process <- function(
   )
   total_portfolio <- add_inv_and_port_names_if_needed(
     data = total_portfolio,
-    portfolio_name = params[["portfolio"]][["portfolio_name"]],
+    portfolio_name = params[["portfolio"]][["name"]],
     investor_name = params[["user"]][["investor_name"]]
   )
 
@@ -171,7 +171,7 @@ run_pacta_reporting_process <- function(
   )
   equity_results_portfolio <- add_inv_and_port_names_if_needed(
     data = equity_results_portfolio,
-    portfolio_name = params[["portfolio"]][["portfolio_name"]],
+    portfolio_name = params[["portfolio"]][["name"]],
     investor_name = params[["user"]][["investor_name"]]
   )
 
@@ -182,7 +182,7 @@ run_pacta_reporting_process <- function(
   )
   bonds_results_portfolio <- add_inv_and_port_names_if_needed(
     data = bonds_results_portfolio,
-    portfolio_name = params[["portfolio"]][["portfolio_name"]],
+    portfolio_name = params[["portfolio"]][["name"]],
     investor_name = params[["user"]][["investor_name"]]
   )
 
@@ -193,7 +193,7 @@ run_pacta_reporting_process <- function(
   )
   equity_results_company <- add_inv_and_port_names_if_needed(
     data = equity_results_company,
-    portfolio_name = params[["portfolio"]][["portfolio_name"]],
+    portfolio_name = params[["portfolio"]][["name"]],
     investor_name = params[["user"]][["investor_name"]]
   )
 
@@ -204,7 +204,7 @@ run_pacta_reporting_process <- function(
   )
   bonds_results_company <- add_inv_and_port_names_if_needed(
     data = bonds_results_company,
-    portfolio_name = params[["portfolio"]][["portfolio_name"]],
+    portfolio_name = params[["portfolio"]][["name"]],
     investor_name = params[["user"]][["investor_name"]]
   )
 
@@ -215,7 +215,7 @@ run_pacta_reporting_process <- function(
   )
   equity_results_map <- add_inv_and_port_names_if_needed(
     data = equity_results_map,
-    portfolio_name = params[["portfolio"]][["portfolio_name"]],
+    portfolio_name = params[["portfolio"]][["name"]],
     investor_name = params[["user"]][["investor_name"]]
   )
 
@@ -226,7 +226,7 @@ run_pacta_reporting_process <- function(
   )
   bonds_results_map <- add_inv_and_port_names_if_needed(
     data = bonds_results_map,
-    portfolio_name = params[["portfolio"]][["portfolio_name"]],
+    portfolio_name = params[["portfolio"]][["name"]],
     investor_name = params[["user"]][["investor_name"]]
   )
 
