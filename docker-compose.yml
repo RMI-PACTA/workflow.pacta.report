@@ -10,9 +10,9 @@ services:
       LOG_LEVEL: TRACE
       ANALYSIS_OUTPUT_DIR: "/mnt/analysis_output_dir"
       BENCHMARKS_DIR: "/mnt/benchmarks_dir"
+      REAL_ESTATE_DIR: "/mnt/real_estate_dir"
       REPORT_OUTPUT_DIR: "/mnt/report_output_dir"
       SUMMARY_OUTPUT_DIR: "/mnt/summary_output_dir"
-      REAL_ESTATE_DIR: "/mnt/real_estate_dir"
       SURVEY_DIR: "/mnt/survey_dir"
     volumes:
       - type: bind
