@@ -6,8 +6,8 @@
   "parameters": {
     "portfolio": {
       "holdingsDate": "2023-12-31",
-      "portfolio_files": "default_portfolio.csv",
-      "portfolio_name": "Default Portfolio"
+      "name": "Default Portfolio",
+      "portfolio_files": "default_portfolio.csv"
     },
     "user": {
       "investor_name": "Default Investor",

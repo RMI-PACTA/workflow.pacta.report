@@ -4,7 +4,11 @@
   "resultsURL": "https://pactadatadev.blob.core.windows.net/ghactions-workflow-pacta-results/76/merge/latest/default_2023Q4/output_dir",
   "benchmarksURL": "https://pactadatadev.file.core.windows.net/workflow-prepare-pacta-indices-outputs/2023Q4_20240529T002355Z",
   "parameters": {
-    "portfolio_files": "default_portfolio.csv",
+    "portfolio": {
+      "holdingsDate": "2023-12-31",
+      "name": "Default Portfolio",
+      "portfolio_files": "default_portfolio.csv"
+    },
     "inherit": "GENERAL_2023Q4"
   }
 }
