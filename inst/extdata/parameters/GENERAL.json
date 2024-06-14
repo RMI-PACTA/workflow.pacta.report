@@ -1,7 +1,7 @@
 {
   "reporting": {
-    "project_code": "GENERAL",
-    "project_report_name": "general"
+    "projectCode": "GENERAL",
+    "projectReportName": "general"
   },
   "inherit": "default"
 }

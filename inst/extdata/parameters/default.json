@@ -1,7 +1,7 @@
 {
   "reporting": {
-    "scenario_geography": "Global",
-    "sector_list": [
+    "scenarioGeography": "Global",
+    "sectorList": [
       "Power",
       "Automotive",
       "Oil&Gas",
@@ -10,19 +10,19 @@
       "Aviation",
       "Cement"
     ],
-    "portfolio_allocation_method": "portfolio_weight",
-    "tech_roadmap_sectors": [
+    "portfolioAllocationMethod": "portfolio_weight",
+    "techRoadmapSectors": [
       "Power",
       "Automotive",
       "Oil&Gas",
       "Coal"
     ],
-    "pacta_sectors_not_analysed": [
+    "pactaSectorsNotAnalysed": [
       "Steel",
       "Aviation",
       "Cement"
     ],
-    "green_techs": [
+    "greenTechs": [
       "RenewablesCap",
       "HydroCap",
       "NuclearCap",
@@ -33,10 +33,10 @@
     ]
   },
   "user": {
-    "currency_exchange_value": 1,
-    "display_currency": "USD",
-    "investor_name": "Default Investor",
-    "language_select": "EN",
-    "peer_group": "bank"
+    "currencyExchangeValue": 1,
+    "displayCurrency": "USD",
+    "investorName": "Default Investor",
+    "languageSelect": "EN",
+    "peerGroup": "bank"
   }
 }

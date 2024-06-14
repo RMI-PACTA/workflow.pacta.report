@@ -1,7 +1,7 @@
 {
   "reporting": {
-    "scenario_other": "GECO2022_1.5C",
-    "select_scenario": "WEO2022_NZE_2050"
+    "scenarioOther": "GECO2022_1.5C",
+    "selectScenario": "WEO2022_NZE_2050"
   },
   "inherit": "GENERAL"
 }
