@@ -123,7 +123,7 @@ run_pacta_reporting_process <- function(
   } else {
     log_trace(
       "Using language selection: ",
-      "\"{params[['user']][['langaugeSelect']]}\"."
+      "\"{params[['user']][['languageSelect']]}\"."
     )
   }
 
@@ -305,7 +305,7 @@ run_pacta_reporting_process <- function(
     project_report_name = params[["reporting"]][["projectReportName"]],
     survey_dir = survey_dir,
     real_estate_dir = real_estate_dir,
-    language_select = params[["user"]][["langaugeSelect"]],
+    language_select = params[["user"]][["languageSelect"]],
     peer_group = params[["user"]][["peerGroup"]],
     investor_name = params[["user"]][["name"]],
     portfolio_name = params[["portfolio"]][["name"]],
@@ -345,7 +345,7 @@ run_pacta_reporting_process <- function(
     real_estate_dir = real_estate_dir,
     score_card_dir = score_card_dir,
     project_code = params[["reporting"]][["projectCode"]],
-    language_select = params[["user"]][["langaugeSelect"]],
+    language_select = params[["user"]][["languageSelect"]],
     peer_group = params[["user"]][["peerGroup"]],
     investor_name = params[["user"]][["name"]],
     portfolio_name = params[["portfolio"]][["name"]],
