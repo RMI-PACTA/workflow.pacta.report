@@ -35,7 +35,7 @@
   "user": {
     "currencyExchangeValue": 1,
     "displayCurrency": "USD",
-    "investorName": "Default Investor",
+    "name": "Default Investor",
     "languageSelect": "EN",
     "peerGroup": "bank"
   }
