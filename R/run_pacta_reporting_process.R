@@ -234,25 +234,49 @@ run_pacta_reporting_process <- function(
 
   log_debug("Loading portfolio equity peer results.")
   peers_equity_results_portfolio <- read_rds_or_return_alt_data(
-    filepath = file.path(benchmarks_dir, paste0(params[["reporting"]][["project_code"]], "_peers_equity_results_portfolio.rds")),
+    filepath = file.path(
+      benchmarks_dir,
+      paste0(
+        params[["reporting"]][["project_code"]],
+        "_peers_equity_results_portfolio.rds"
+      )
+    ),
     alt_return = pacta.portfolio.utils::empty_portfolio_results()
   )
 
   log_debug("Loading portfolio bonds peer results.")
   peers_bonds_results_portfolio <- read_rds_or_return_alt_data(
-    filepath = file.path(benchmarks_dir, paste0(params[["reporting"]][["project_code"]], "_peers_bonds_results_portfolio.rds")),
+    filepath = file.path(
+      benchmarks_dir,
+      paste0(
+        params[["reporting"]][["project_code"]],
+        "_peers_bonds_results_portfolio.rds"
+      )
+    ),
     alt_return = pacta.portfolio.utils::empty_portfolio_results()
   )
 
   log_debug("Loading index equity peer results.")
   peers_equity_results_user <- read_rds_or_return_alt_data(
-    filepath = file.path(benchmarks_dir, paste0(params[["reporting"]][["project_code"]], "_peers_equity_results_portfolio_ind.rds")),
+    filepath = file.path(
+      benchmarks_dir,
+      paste0(
+        params[["reporting"]][["project_code"]],
+        "_peers_equity_results_portfolio_ind.rds"
+      )
+    ),
     alt_return = pacta.portfolio.utils::empty_portfolio_results()
   )
 
   log_debug("Loading index bonds peer results.")
   peers_bonds_results_user <- read_rds_or_return_alt_data(
-    filepath = file.path(benchmarks_dir, paste0(params[["reporting"]][["project_code"]], "_peers_bonds_results_portfolio_ind.rds")),
+    filepath = file.path(
+      benchmarks_dir,
+      paste0(
+        params[["reporting"]][["project_code"]],
+        "_peers_bonds_results_portfolio_ind.rds"
+      )
+    ),
     alt_return = pacta.portfolio.utils::empty_portfolio_results()
   )
 
