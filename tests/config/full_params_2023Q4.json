@@ -7,19 +7,19 @@
     "portfolio": {
       "holdingsDate": "2023-12-31",
       "name": "Default Portfolio",
-      "portfolio_files": "default_portfolio.csv"
+      "files": "default_portfolio.csv"
     },
     "user": {
-      "investor_name": "Default Investor",
-      "language_select": "EN",
-      "peer_group": "bank",
-      "currency_exchange_value": 1,
-      "display_currency": "USD"
+      "name": "Default Investor",
+      "languageSelect": "EN",
+      "peerGroup": "bank",
+      "currencyExchangeValue": 1,
+      "displayCurrency": "USD"
     },
     "reporting": {
-      "project_code": "GENERAL",
-      "project_report_name": "general",
-      "green_techs": [
+      "projectCode": "GENERAL",
+      "projectReportName": "general",
+      "greenTechs": [
         "RenewablesCap",
         "HydroCap",
         "NuclearCap",
@@ -28,16 +28,16 @@
         "FuelCell",
         "Electric Arc Furnace"
       ],
-      "pacta_sectors_not_analysed": [
+      "pactaSectorsNotAnalysed": [
         "Steel",
         "Aviation",
         "Cement"
       ],
-      "portfolio_allocation_method": "portfolio_weight",
-      "scenario_geography": "Global",
-      "scenario_other": "GECO2022_1.5C",
-      "select_scenario": "WEO2022_NZE_2050",
-      "tech_roadmap_sectors": [
+      "portfolioAllocationMethod": "portfolio_weight",
+      "scenarioGeography": "Global",
+      "scenarioOther": "GECO2022_1.5C",
+      "selectScenario": "WEO2022_NZE_2050",
+      "techRoadmapSectors": [
         "Power",
         "Automotive",
         "Coal"
