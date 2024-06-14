@@ -25,6 +25,18 @@ run_pacta_reporting_process <- function(
     log_error("SUMMARY_OUTPUT_DIR not set.")
     stop("SUMMARY_OUTPUT_DIR not set.")
   }
+  if (is.null(real_estate_dir) || real_estate_dir == "") {
+    log_error("REAL_ESTATE_DIR not set.")
+    stop("REAL_ESTATE_DIR not set.")
+  }
+  if (is.null(survey_dir) || survey_dir == "") {
+    log_error("SURVEY_DIR not set.")
+    stop("SURVEY_DIR not set.")
+  }
+  if (is.null(score_card_dir) || score_card_dir == "") {
+    log_error("SCORE_CARD_DIR not set.")
+    stop("SCORE_CARD_DIR not set.")
+  }
 
   # defaulting to WARN to maintain current (silent) behavior.
   logger::log_threshold(Sys.getenv("LOG_LEVEL", "INFO"))
