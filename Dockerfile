@@ -18,6 +18,7 @@ RUN apt-get update \
       libcurl4-openssl-dev=7.81.* \
       libgit2-dev=1.1.* \
       libicu-dev=70.* \
+      libnode-dev=12.22.* \
       libpng-dev=1.6.* \
       libssl-dev=3.0.* \
       libxt6=1:1.2.* \
