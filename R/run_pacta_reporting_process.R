@@ -80,7 +80,7 @@ run_pacta_reporting_process <- function(
       package = "workflow.pacta.report"
     ) ,
     schema_file = system.file(
-      "extdata", "schema", "portfolioParameters_0-0-1.json",
+      "extdata", "schema", "reportingParameters.json",
       package = "workflow.pacta.report"
     )
   )
