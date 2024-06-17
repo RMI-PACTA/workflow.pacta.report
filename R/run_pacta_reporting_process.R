@@ -79,11 +79,10 @@ run_pacta_reporting_process <- function(
       "extdata", "parameters",
       package = "workflow.pacta.report"
     ) ,
-    schema_file = NULL
-    # schema_file = system.file(
-    #   "extdata", "schema", "portfolioParameters_0-0-1.json",
-    #   package = "workflow.pacta.report"
-    # )
+    schema_file = system.file(
+      "extdata", "schema", "portfolioParameters_0-0-1.json",
+      package = "workflow.pacta.report"
+    )
   )
 
   # quit if there's no relevant PACTA assets -------------------------------------

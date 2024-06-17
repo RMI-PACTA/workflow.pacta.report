@@ -23,6 +23,7 @@ RoxygenNote: 7.3.1
 Imports:
     dplyr,
     jsonlite,
+    jsonvalidate,
     logger,
     pacta.executive.summary,
     pacta.portfolio.report,
