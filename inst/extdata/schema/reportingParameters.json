@@ -17,7 +17,7 @@
           "type": "string",
           "description": "User name."
         },
-        "languageSelection": {
+        "languageSelect": {
           "type": "string",
           "description": "Language selection.",
           "enum": [
@@ -52,7 +52,7 @@
       },
       "required": [
         "name",
-        "languageSelection",
+        "languageSelect",
         "peerGroup",
         "currencyExchangeValue",
         "displayCurrency"
@@ -164,7 +164,7 @@
     {
       "required": [
         "portfolio",
-        "analysis",
+        "reporting",
         "user"
       ]
     },
