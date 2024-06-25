@@ -1,17 +1,47 @@
 {
   "holdingsDate": "2023Q4",
   "pactaDataURL": "https://pactadatadev.file.core.windows.net/workflow-data-preparation-outputs/2023Q4_20240424T120055Z",
-  "resultsURL": "https://pactadatadev.blob.core.windows.net/ghactions-workflow-pacta-results/73/merge/latest/full_params_2023Q4/output_dir",
+  "resultsURL": "https://pactadatadev.blob.core.windows.net/ghactions-workflow-pacta-results/76/merge/latest/full_params_2023Q4/output_dir",
   "benchmarksURL": "https://pactadatadev.file.core.windows.net/workflow-prepare-pacta-indices-outputs/2023Q4_20240529T002355Z",
   "parameters": {
-    "equity_market_list": ["GlobalMarket", "DevelopedMarket", "EmergingMarket"],
-    "scenario_geographies_list": ["Global", "GlobalAggregate", "NonOECD", "OECD"],
-    "sector_list": ["Power", "Automotive", "Oil&Gas", "Coal", "Steel", "Aviation", "Cement"],
-    "time_horizon": 5,
-    "start_year": 2023,
-    "holdingsDate": "2023-12-31",
-    "scenario_sources_list": ["GECO2023", "ISF2023", "WEO2023"],
-    "project_code": "GENERAL",
-    "portfolio_files": "default_portfolio.csv"
+    "portfolio": {
+      "holdingsDate": "2023-12-31",
+      "name": "Default Portfolio",
+      "files": "default_portfolio.csv"
+    },
+    "user": {
+      "name": "Default Investor",
+      "languageSelect": "EN",
+      "peerGroup": "bank",
+      "currencyExchangeValue": 1,
+      "displayCurrency": "USD"
+    },
+    "reporting": {
+      "projectCode": "GENERAL",
+      "projectReportName": "general",
+      "greenTechs": [
+        "RenewablesCap",
+        "HydroCap",
+        "NuclearCap",
+        "Hybrid",
+        "Electric",
+        "FuelCell",
+        "Electric Arc Furnace"
+      ],
+      "pactaSectorsNotAnalysed": [
+        "Steel",
+        "Aviation",
+        "Cement"
+      ],
+      "portfolioAllocationMethod": "portfolio_weight",
+      "scenarioGeography": "Global",
+      "scenarioOther": "GECO2022_1.5C",
+      "selectScenario": "WEO2022_NZE_2050",
+      "techRoadmapSectors": [
+        "Power",
+        "Automotive",
+        "Coal"
+      ]
+    }
   }
 }

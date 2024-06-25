@@ -118,14 +118,20 @@ jobs:
             --env LOG_LEVEL=TRACE \
             --env ANALYSIS_OUTPUT_DIR="/mnt/analysis_output_dir" \
             --env BENCHMARKS_DIR="/mnt/benchmarks_dir" \
+            --env REAL_ESTATE_DIR="/mnt/real_estate_dir" \
             --env REPORT_OUTPUT_DIR="/mnt/report_output_dir" \
+            --env SCORE_CARD_DIR="/mnt/score_card_dir" \
             --env SUMMARY_OUTPUT_DIR="/mnt/summary_output_dir" \
-            --mount type=bind,readonly,source=${WORKSPACE}/${BENCHMARKS_DIR},target=/mnt/benchmarks_dir \
+            --env SURVEY_DIR="/mnt/survey_dir" \
             --mount type=bind,readonly,source=${WORKSPACE}/${ANALYSIS_OUTPUT_DIR},target=/mnt/analysis_output_dir \
+            --mount type=bind,readonly,source=${WORKSPACE}/${BENCHMARKS_DIR},target=/mnt/benchmarks_dir \
+            --mount type=bind,readonly,source=${WORKSPACE}/${REAL_ESTATE_DIR},target=/mnt/real_estate_dir \
+            --mount type=bind,readonly,source=${WORKSPACE}/${SCORE_CARD_DIR},target=/mnt/score_card_dir \
+            --mount type=bind,readonly,source=${WORKSPACE}/${SURVEY_DIR},target=/mnt/survey_dir \
             --mount type=bind,source=${WORKSPACE}/${REPORT_OUTPUT_DIR},target=/mnt/report_output_dir \
             --mount type=bind,source=${WORKSPACE}/${SUMMARY_OUTPUT_DIR},target=/mnt/summary_output_dir \
             $FULL_IMAGE_NAME \
-            $PARAMETERS
+            "$PARAMETERS"
 
       - name: List outputs
         run: |
