@@ -73,7 +73,7 @@ run_pacta_reporting_process <- function(
     stop("Invalid raw input parameters.")
   }
 
-  params <- pacta.workflow.utils:::parse_params(
+  params <- pacta.workflow.utils::parse_params(
     json = raw_params,
     inheritence_search_paths = system.file(
       "extdata", "parameters",
