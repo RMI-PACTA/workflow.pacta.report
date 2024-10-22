@@ -27,10 +27,8 @@ Imports:
     pacta.executive.summary,
     pacta.portfolio.report,
     pacta.portfolio.utils,
-    pacta.workflow.utils,
     readr
 Remotes:
     RMI-PACTA/pacta.executive.summary,
     RMI-PACTA/pacta.portfolio.report,
     RMI-PACTA/pacta.portfolio.utils,
-    RMI-PACTA/pacta.workflow.utils
