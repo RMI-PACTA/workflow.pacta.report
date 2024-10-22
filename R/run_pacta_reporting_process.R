@@ -288,12 +288,12 @@ run_pacta_reporting_process <- function(
   )
 
   log_debug("Loading index equity portfolio results.")
-  indices_equity_results_portfolio_path <- file.path(benchmarks_dir, "Indices_equity_results_portfolio.rds")
-  indices_equity_results_portfolio <- readRDS(indices_equity_results_portfolio_path)
+  indices_equity_results_port_path <- file.path(benchmarks_dir, "Indices_equity_results_portfolio.rds")
+  indices_equity_results_portfolio <- readRDS(indices_equity_results_port_path)
 
   log_debug("Loading index bonds portfolio results.")
-  indices_bonds_results_portfolio_path <- file.path(benchmarks_dir, "Indices_bonds_results_portfolio.rds")
-  indices_bonds_results_portfolio <- readRDS(indices_bonds_results_portfolio_path)
+  indices_bonds_results_port_path <- file.path(benchmarks_dir, "Indices_bonds_results_portfolio.rds")
+  indices_bonds_results_portfolio <- readRDS(indices_bonds_results_port_path)
 
   # create interactive report ----------------------------------------------------
 
@@ -383,8 +383,8 @@ run_pacta_reporting_process <- function(
           peers_bonds_results_portfolio_path,
           peers_equity_results_user_path,
           peers_bonds_results_user_path,
-          indices_equity_results_portfolio_path,
-          indices_bonds_results_portfolio_path
+          indices_equity_results_port_path,
+          indices_bonds_results_port_path
         )
       ),
       output_files = c(
@@ -392,13 +392,13 @@ run_pacta_reporting_process <- function(
           report_output_dir,
           full.names = TRUE,
           recursive = TRUE
-          ),
+        ),
         list.files(
           summary_output_dir,
           full.names = TRUE,
           recursive = TRUE
         )
-        ),
+      ),
       params = params
     )
   )
