@@ -17,6 +17,14 @@ params <- pacta.workflow.utils::parse_raw_params(
   )
 )
 
-workflow.pacta.report:::run_pacta_reporting_process(
+manifest_info <- workflow.pacta.report:::run_pacta_reporting_process(
   params = params
+)
+
+pacta.workflow.utils::export_manifest(
+  input_files = manifest_info[["input_files"]],
+  output_files = manifest_info[["output_files"]],
+  params = manifest_info[["params"]],
+  manifest_path = file.path(Sys.getenv("REPORT_OUTPUT_DIR"), "manifest.json"),
+  raw_params = raw_params
 )
