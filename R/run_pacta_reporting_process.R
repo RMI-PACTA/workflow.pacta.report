@@ -362,31 +362,36 @@ run_pacta_reporting_process <- function(
   )
 
   log_info("Portfolio report finished.")
+
+  # Prepare manifest info
+  input_files <- unique(
+    c(
+      analysis_manifest_path,
+      total_portfolio_path,
+      audit_file_path,
+      portfolio_overview_path,
+      emissions_path,
+      total_portfolio_path,
+      equity_results_portfolio_path,
+      bonds_results_portfolio_path,
+      equity_results_company_path,
+      bonds_results_company_path,
+      equity_results_map_path,
+      bonds_results_map_path,
+      analysis_manifest_path,
+      peers_equity_results_portfolio_path,
+      peers_bonds_results_portfolio_path,
+      peers_equity_results_user_path,
+      peers_bonds_results_user_path,
+      indices_equity_results_port_path,
+      indices_bonds_results_port_path
+    )
+  )
+  input_files <- input_files[file.exists(input_files)]
+
   return(
     list(
-      input_files = unique(
-        c(
-          analysis_manifest_path,
-          total_portfolio_path,
-          audit_file_path,
-          portfolio_overview_path,
-          emissions_path,
-          total_portfolio_path,
-          equity_results_portfolio_path,
-          bonds_results_portfolio_path,
-          equity_results_company_path,
-          bonds_results_company_path,
-          equity_results_map_path,
-          bonds_results_map_path,
-          analysis_manifest_path,
-          peers_equity_results_portfolio_path,
-          peers_bonds_results_portfolio_path,
-          peers_equity_results_user_path,
-          peers_bonds_results_user_path,
-          indices_equity_results_port_path,
-          indices_bonds_results_port_path
-        )
-      ),
+      input_files = input_files,
       output_files = c(
         list.files(
           report_output_dir,
