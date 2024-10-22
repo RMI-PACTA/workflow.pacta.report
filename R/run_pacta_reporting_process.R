@@ -1,5 +1,5 @@
 run_pacta_reporting_process <- function(
-  raw_params = commandArgs(trailingOnly = TRUE),
+  params,
   analysis_output_dir = Sys.getenv("ANALYSIS_OUTPUT_DIR"),
   benchmarks_dir = Sys.getenv("BENCHMARKS_DIR"),
   report_output_dir = Sys.getenv("REPORT_OUTPUT_DIR"),
@@ -38,52 +38,7 @@ run_pacta_reporting_process <- function(
     stop("SCORE_CARD_DIR not set.")
   }
 
-  # defaulting to WARN to maintain current (silent) behavior.
-  logger::log_threshold(Sys.getenv("LOG_LEVEL", "INFO"))
-  logger::log_formatter(logger::formatter_glue)
-
-  # -------------------------------------------------------------------------
-
   log_info("Starting portfolio report process")
-
-  # Read Params
-  log_trace("Processing input parameters.")
-  if (length(raw_params) == 0L || all(raw_params == "")) {
-    log_error("No parameters specified.")
-  }
-
-  log_trace("Validating raw input parameters.")
-  raw_input_validation_results <- jsonvalidate::json_validate(
-    json = raw_params,
-    schema = system.file(
-      "extdata", "schema", "rawParameters.json",
-      package = "workflow.pacta.report"
-    ),
-    verbose = TRUE,
-    greedy = FALSE,
-    engine = "ajv"
-  )
-  if (raw_input_validation_results) {
-    log_trace("Raw input parameters are valid.")
-  } else {
-    log_error(
-      "Invalid raw input parameters. ",
-      "Must include \"inherit\" key, or match full schema."
-    )
-    stop("Invalid raw input parameters.")
-  }
-
-  params <- pacta.workflow.utils::parse_params(
-    json = raw_params,
-    inheritence_search_paths = system.file(
-      "extdata", "parameters",
-      package = "workflow.pacta.report"
-    ) ,
-    schema_file = system.file(
-      "extdata", "schema", "reportingParameters.json",
-      package = "workflow.pacta.report"
-    )
-  )
 
   # quit if there's no relevant PACTA assets -------------------------------------
 
