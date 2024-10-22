@@ -20,10 +20,20 @@ run_pacta_reporting_process <- function(
   if (is.null(report_output_dir) || report_output_dir == "") {
     log_error("REPORT_OUTPUT_DIR not set.")
     stop("REPORT_OUTPUT_DIR not set.")
+  } else {
+    if (!pacta.portfolio.utils::check_dir_writable(report_output_dir)) {
+      log_warn("Directory \"{report_output_dir}\" is not writable.")
+      stop("Directory \"{report_output_dir}\" is not writable.")
+    }
   }
   if (is.null(summary_output_dir) || summary_output_dir == "") {
     log_error("SUMMARY_OUTPUT_DIR not set.")
     stop("SUMMARY_OUTPUT_DIR not set.")
+  } else {
+    if (!pacta.portfolio.utils::check_dir_writable(summary_output_dir)) {
+      log_warn("Directory \"{report_output_dir}\" is not writable.")
+      stop("Directory \"{report_output_dir}\" is not writable.")
+    }
   }
   if (is.null(real_estate_dir) || real_estate_dir == "") {
     log_error("REAL_ESTATE_DIR not set.")
