@@ -21,7 +21,7 @@ run_pacta_reporting_process <- function(
     log_error("REPORT_OUTPUT_DIR not set.")
     stop("REPORT_OUTPUT_DIR not set.")
   } else {
-    if (!pacta.portfolio.utils::check_dir_writable(report_output_dir)) {
+    if (!pacta.workflow.utils::check_dir_writable(report_output_dir)) {
       log_warn("Directory \"{report_output_dir}\" is not writable.")
       stop("Directory \"{report_output_dir}\" is not writable.")
     }
@@ -30,7 +30,7 @@ run_pacta_reporting_process <- function(
     log_error("SUMMARY_OUTPUT_DIR not set.")
     stop("SUMMARY_OUTPUT_DIR not set.")
   } else {
-    if (!pacta.portfolio.utils::check_dir_writable(summary_output_dir)) {
+    if (!pacta.workflow.utils::check_dir_writable(summary_output_dir)) {
       log_warn("Directory \"{report_output_dir}\" is not writable.")
       stop("Directory \"{report_output_dir}\" is not writable.")
     }
