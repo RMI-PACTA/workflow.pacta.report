@@ -138,34 +138,41 @@ jobs:
           ls -lR report_output_dir
           ls -lR summary_output_dir
 
-      # https://github.com/marketplace/actions/azure-cli-action#workflow-to-execute-an-azure-cli-script-of-a-specific-cli-version
-      - name: Upload results to blob store
-        id: upload
-        uses: azure/CLI@v2
-        env:
-          CONFIG_NAME: ${{ inputs.config-name }}
-          GITHUB_REF_NAME: ${{ github.ref_name}}
-          GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
-          GITHUB_RUN_NUMBER: ${{ github.run_number }}
-          REPORT_OUTPUT_DIR: report_output_dir
-          SUMMARY_OUTPUT_DIR: summary_output_dir
-          RESULTS_URL: ${{ inputs.results-url }}
+      - name: Upload report to Blob store 
+        id: upload-report
+        uses: RMI-PACTA/actions/actions/azure/blob-copy@main
         with:
-          inlineScript: |
-            unique_directory="$RESULTS_URL/$GITHUB_REF_NAME/$GITHUB_RUN_NUMBER/$GITHUB_RUN_ATTEMPT/$CONFIG_NAME"
-            az storage copy \
-              --source "$REPORT_OUTPUT_DIR"/* \
-              --destination "$unique_directory" \
-              --recursive
-            echo "report-url=${unique_directory}/report/index.html" >> "$GITHUB_OUTPUT"
+          source: report_output_dir
+          destination: ${{ inputs.results-url }}/${{ github.ref_name }}/${{ github.run_number }}/${{ github.run_attempt }}/${{ inputs.config-name }}
+          overwrite: false
 
-            az storage copy \
-              --source "$SUMMARY_OUTPUT_DIR"/* \
-              --destination "$unique_directory" \
-              --recursive
-            summary_files="$(ls $SUMMARY_OUTPUT_DIR/executive_summary/*.pdf)"
-            echo "summary-url=${unique_directory}/executive_summary/$summary_files" >> "$GITHUB_OUTPUT"
+      - name: Upload summary to Blob store 
+        id: upload-summary
+        uses: RMI-PACTA/actions/actions/azure/blob-copy@main
+        with:
+          source: summary_output_dir
+          destination: ${{ inputs.results-url }}/${{ github.ref_name }}/${{ github.run_number }}/${{ github.run_attempt }}/${{ inputs.config-name }}
+          overwrite: false
 
+      - name: Export Outputs
+        id: export-outputs
+        env:
+          REPORT_UPLOADED_FILES: ${{ steps.upload-report.outputs.destination-files }}
+          SUMMARY_UPLOADED_FILES: ${{ steps.upload-summary.outputs.destination-files }}
+        run: |
+
+          REPORT_URL="$(
+            echo "$REPORT_UPLOADED_FILES" | jq -rc '. [] | match(".*index.html$") | .string'
+          )"
+          echo "report-url=$REPORT_URL"
+          echo "report-url=$REPORT_URL" >> "$GITHUB_OUTPUT"
+
+          SUMMARY_URL="$(
+            echo "$SUMMARY_UPLOADED_FILES" | jq -rc '. [] | match(".*.pdf$") | .string'
+          )"
+          echo "summary-url=$SUMMARY_URL"
+          echo "summary-url=$SUMMARY_URL" >> "$GITHUB_OUTPUT"
+          
       - name: Prepare comment artifact
         id: prepare-artifact
         env:
@@ -173,8 +180,8 @@ jobs:
           config_name: ${{ inputs.config-name }}
           full_image_name: ${{ inputs.full-image-name }}
           git_sha: ${{ github.event.pull_request.head.sha }}
-          report_url: ${{ steps.upload.outputs.report-url }}
-          summary_url: ${{ steps.upload.outputs.summary-url }}
+          report_url: ${{ steps.export-outputs.outputs.report-url }}
+          summary_url: ${{ steps.export-outputs.outputs.summary-url }}
         run: |
           mkdir -p /tmp/comment-json
           json_filename="$( \
