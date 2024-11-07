@@ -11,6 +11,6 @@
         "default_portfolio.csv"
       ]
     },
-    "inherit": "GENERAL_2023Q4"
+    "inherit": "report_GENERAL_2023Q4"
   }
 }
