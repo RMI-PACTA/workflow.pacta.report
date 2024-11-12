@@ -1,4 +1,4 @@
-#' Read an RDS file or return an alternative data set 
+#' Read an RDS file or return an alternative data set
 #'
 #' @param filepath Path to the RDS file to read.
 #' @param alt_return Data to return if the file is not found.
