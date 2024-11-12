@@ -1,3 +1,42 @@
+#' Prepare an Executive Summary PDF
+#'
+#' Run the required steps to prepare an executive summary from existing
+#' analysis results.
+#'
+#' @param summary_output_dir Directory where the executive summary will be
+#' saved.
+#' @param survey_dir Directory containing survey data.
+#' @param real_estate_dir Directory containing real estate data.
+#' @param score_card_dir Directory containing score card data.
+#' @param project_code Project code, defining the template to use.
+#' @param language_select Language to use for the executive summary.
+#' @param peer_group Investor's Peer group.
+#' @param investor_name Investor's name.
+#' @param portfolio_name Portfolio's name.
+#' @param start_year Start year of the analysis.
+#' @param currency_exchange_value Exchange value from Display cyurrency to USD.
+#' @param total_portfolio Data frame with the total portfolio information.
+#' @param equity_results_portfolio Data frame with the equity results for the
+#' portfolio.
+#' @param bonds_results_portfolio Data frame with the bonds results for the
+#' portfolio.
+#' @param indices_equity_results_portfolio Data frame with the equity results
+#' for the indices (benchmarks).
+#' @param indices_bonds_results_portfolio Data frame with the bonds results for
+#' the indices (benchmarks).
+#' @param audit_file Audit file.
+#' @param emissions Emissions data.
+#' @param peers_bonds_results_portfolio Data frame with the portfolio-level
+#' bonds results for the peers.
+#' @param peers_bonds_results_user Data frame with the user-level bonds results
+#' for the peers.
+#' @param peers_equity_results_portfolio Data frame with the portfolio-level
+#' equity results for the peers.
+#' @param peers_equity_results_user Data frame with the user-level equity
+#' results for the peers.
+#' @return List of manifest information, suitable for use in
+#' `pacta.workflow.utils::export_manifest`.
+#' @export
 prepare_executive_summary <- function(
   summary_output_dir,
   survey_dir,
