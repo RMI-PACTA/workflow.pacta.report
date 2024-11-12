@@ -3,5 +3,5 @@
     "projectCode": "GENERAL",
     "projectReportName": "general"
   },
-  "inherit": "default"
+  "inherit": "report_default"
 }
