@@ -33,4 +33,4 @@ Remotes:
     RMI-PACTA/pacta.executive.summary,
     RMI-PACTA/pacta.portfolio.report,
     RMI-PACTA/pacta.portfolio.utils,
-    RMI-PACTA/pacta.workflow.utils@multiple-inherit
+    RMI-PACTA/pacta.workflow.utils
