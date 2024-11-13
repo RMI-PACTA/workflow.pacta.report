@@ -1,3 +1,58 @@
+#' Prepare an Interactive HTML Report
+#'
+#' Run the required steps to prepare an interactive HTML report from existing
+#' analysis results.
+#'
+#' @param report_output_dir Directory where the interactive report will be
+#' saved.
+#' @param project_report_name Name of the project.
+#' @param survey_dir Directory containing survey data.
+#' @param real_estate_dir Directory containing real estate data.
+#' @param language_select Language to use for the interactive report.
+#' @param peer_group Investor's Peer group.
+#' @param investor_name Investor's name.
+#' @param portfolio_name Portfolio's name.
+#' @param start_year Start year of the analysis.
+#' @param currency_exchange_value Exchange value from Display currency to USD.
+#' @param select_scenario Default scenario to be displayed in visualizations.
+#' @param scenario_other Other scenarios to be displayed in visualizations.
+#' @param portfolio_allocation_method Method used to allocate the portfolio.
+#' @param scenario_geography Geographies included in the scenarios.
+#' @param sector_list Sectors included in the analysis.
+#' @param green_techs Green technologies included in the analysis.
+#' @param tech_roadmap_sectors Sectors included in the technology roadmap.
+#' @param pacta_sectors_not_analysed Sectors not analysed in the analysis.
+#' @param display_currency Currency to be displayed in the report.
+#' @param audit_file Audit file.
+#' @param emissions Emissions data.
+#' @param portfolio_overview Portfolio overview data.
+#' @param equity_results_portfolio Data frame with the equity results for the
+#' portfolio.
+#' @param bonds_results_portfolio Data frame with the bonds results for the
+#' portfolio.
+#' @param equity_results_company Data frame with company-level equity results
+#' for the portfolio
+#' @param bonds_results_company Data frame with company-level bonds results for
+#' the portfolio
+#' @param equity_results_map Data frame with the equity results for the map.
+#' @param bonds_results_map Data frame with the bonds results for the map.
+#' @param indices_bonds_results_portfolio Data frame with the bonds results for
+#' the indices (benchmarks).
+#' @param indices_equity_results_portfolio Data frame with the equity results
+#' for the indices (benchmarks).
+#' @param peers_bonds_results_portfolio Data frame with the portfolio-level
+#' bonds results for the peers.
+#' @param peers_bonds_results_user Data frame with the user-level bonds results
+#' for the peers.
+#' @param peers_equity_results_portfolio Data frame with the portfolio-level
+#' equity results for the peers.
+#' @param peers_equity_results_user Data frame with the user-level equity
+#' results for the peers.
+#' @param analysis_output_manifest List of manifest information from the
+#' analysis.
+#' @return List of manifest information, suitable for use in
+#' `pacta.workflow.utils::export_manifest`.
+#' @export
 prepare_interactive_report <- function(
   report_output_dir,
   project_report_name,
