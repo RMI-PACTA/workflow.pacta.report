@@ -1,3 +1,21 @@
+#' Run PACTA Report and Summary generation process
+#'
+#' Run the required steps to generate a PACTA report and executive summary.
+#'
+#' @param params List of parameters for the PACTA reporting. See JSON schema
+#' for more details.
+#' @param analysis_output_dir Directory containing the PACTA analysis results.
+#' @param benchmarks_dir Directory containing the benchmark analysis results.
+#' @param report_output_dir Directory where the interactive report will be
+#' saved.
+#' @param summary_output_dir Directory where the executive summary will be
+#' saved.
+#' @param real_estate_dir Directory containing real estate data.
+#' @param survey_dir Directory containing survey data.
+#' @param score_card_dir Directory containing score card data.
+#' @return List of manifest information, suitable for use in
+#' `pacta.workflow.utils::export_manifest`.
+#' @export
 run_pacta_reporting_process <- function(
   params,
   analysis_output_dir = Sys.getenv("ANALYSIS_OUTPUT_DIR"),
