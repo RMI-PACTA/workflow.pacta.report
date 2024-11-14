@@ -3,6 +3,6 @@
     "scenarioOther": "GECO2022_1.5C",
     "selectScenario": "WEO2022_NZE_2050"
   },
-  "inherit": "GENERAL"
+  "inherit": "report_GENERAL"
 }
 

@@ -14,7 +14,8 @@ params <- pacta.workflow.utils::parse_raw_params(
   raw_schema_file = system.file(
     "extdata", "schema", "rawParameters.json",
     package = "workflow.pacta.report"
-  )
+  ),
+  force_array = c("portfolio", "files")
 )
 
 manifest_info <- workflow.pacta.report:::run_pacta_reporting_process(
