@@ -6,6 +6,19 @@
   "$comment": "Created by Alex Axthelm, aaxthelm@rmi.org",
   "type": "object",
   "properties": {
+    "commands": {
+      "type": "object",
+      "description": "Commands to run.",
+      "properties": {
+        "report": {
+          "type": "boolean",
+          "description": "Whether to create an interactive report."
+        }
+      },
+      "required": [
+        "report"
+      ]
+    },
     "portfolio": {
       "$ref": "portfolio.json"
     },
@@ -163,6 +176,7 @@
   "allOf": [
     {
       "required": [
+        "commands",
         "portfolio",
         "reporting",
         "user"

@@ -1,4 +1,7 @@
 {
+  "commands": {
+    "report": true
+  },
   "reporting": {
     "scenarioGeography": "Global",
     "sectorList": [
