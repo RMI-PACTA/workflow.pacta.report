@@ -4,6 +4,9 @@
   "resultsURL": "https://pactadatadev.blob.core.windows.net/ghactions-workflow-pacta-results/76/merge/latest/full_params_2023Q4/output_dir",
   "benchmarksURL": "https://pactadatadev.file.core.windows.net/workflow-prepare-pacta-indices-outputs/2023Q4_20240529T002355Z",
   "parameters": {
+    "commands": {
+      "report": true
+    },
     "portfolio": {
       "holdingsDate": "2023-12-31",
       "name": "Default Portfolio",
